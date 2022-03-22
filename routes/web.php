@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InfocategoryController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OtherinfoController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use GuzzleHttp\Middleware;
@@ -24,6 +27,11 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/show/{post:slug}', [HomeController::class, 'show']);
+Route::get('/sejarah', [HomeController::class, 'sejarah']);
+Route::get('/visiMisi', [HomeController::class, 'visiMisi']);
+Route::get('/tentangBapelkes', [HomeController::class, 'tentangBapelkes']);
+
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
@@ -36,4 +44,15 @@ Route::get('/admin', function () {
 })->middleware('auth');
 
 Route::get('/admin/posts/checkSlug', [PostController::class, 'checkSlug'])->middleware('auth');
-Route::resource('/admin/posts', PostController::class);
+Route::get('admin/posts/remove/{images:id}', [PostController::class, 'removeimg'])->middleware('auth');
+
+Route::resource('/admin/posts', PostController::class)->middleware('auth');
+Route::resource('/admin/otherinfos', OtherinfoController::class)->middleware('auth');
+
+Route::resource('/admin/categories', CategoryController::class, [
+    'except' => ['show']
+])->middleware('auth');
+
+Route::resource('/admin/infocategories', InfocategoryController::class, [
+    'except' => ['show']
+])->middleware('auth');

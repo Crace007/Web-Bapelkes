@@ -1,7 +1,7 @@
 @extends('guest.layouts.menu')
 @section('content')
 
-    <div id="demo" class="carousel slide" data-ride="carousel">
+    <div id="demo" class="carousel slide my-2" data-ride="carousel">
         <ul class="carousel-indicators">
             <li data-target="#demo" data-slide-to="0" class="active"></li>
             <li data-target="#demo" data-slide-to="1"></li>
@@ -10,9 +10,14 @@
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="https://source.unsplash.com/1300x450?personal" alt="Los Angeles">
+                
                 <div class="carousel-caption">
-                    <h3>Halaman depan Bapelkes Mataram</h3>
-                    <p>jl. Gora 2 Selagalas Mataram</p>
+                    <div class="d-flex align-items-center p-0">
+                        <div class="text-center flex-fill p-2 opacity-3" style="background-color: rgba(0, 0, 0, 0.7)">
+                            <h3>Halaman depan Bapelkes Mataram</h3>
+                            <p>memiliki taman yang cocok untuk refreshing dan mencari udara segar</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="carousel-item">
@@ -39,30 +44,46 @@
     </div>
     <p>
     <div class="row">
-        <div class="col-sm-8 mt-1">
-            <h4 class="font-size:30px bg-dark text-white text-center">Berita Terbaru</h4>
+        <div class="col-lg-8">
+            <div class="card bg-dark text-center text-white mb-1">
+                <h4 class="font-size:30px">Berita Terbaru</h4>
+            </div>
             @foreach ($posts as $post)
-            <div class="card bg-light text-dark">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <a href=""><img src="https://source.unsplash.com/170x110?{{$post->category->name}}" alt="Los Angeles" width="170" height="120"></a>
-                        </div>
-                        <div class="col-sm-9">
-                            <h4 class="card-title"><a href="#">{{$post->title}}</a></h4>
-                            <div class="text-secondary">Last updated  {{$post->created_at->diffForHumans()}}</div>
-                            <p class="card-text">{{$post->excerpt}}</p>
+                <div class="card bg-light text-dark">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                @foreach ($imagepost as $img)
+
+                                    @if ($img->post_id === $post->id)
+                                        <a href="/show/{{$post->slug}}"><img class="rounded img-fluid w-100" src="{{asset('storage/'. $img->file_name)}}" alt="Los Angeles"></a>
+                                        @break                                        
+                                    @endif
+                                    
+                                    @if ($loop->last)
+                                    <a href="/show/{{$post->slug}}"><img class="rounded img-fluid" src="https://source.unsplash.com/300x250?general" alt="Los Angeles"></a>
+                                    @endif
+
+                                @endforeach
+                            </div>
+                            <div class="col">
+                                <h4 class="card-title"><a href="/show/{{$post->slug}}" class="text-decoration-none text-dark">{{$post->title}}</a></h4>
+                                <div class="text-secondary">Last updated  {{$post->created_at->diffForHumans()}}</div>
+                                <p class="card-text">{{$post->excerpt}}</p>
+                                <a href="/show/{{$post->slug}}" class="link-secondary">Read More <i class="bi bi-caret-right-fill"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             @endforeach
             <div class="mt-2 d-flex justify-content-center">
                 {{ $posts->links() }}
             </div>
         </div>
-        <div class="col-sm-4 mt-1">
-            <h4 class="font-size:30px bg-dark text-white text-center">Profile Bapelkes Mataram</h4>
+        <div class="col-lg-4">
+            <div class="card bg-dark text-center text-white mb-1">
+                <h4 class="font-size:30px">Profile Bapelkes Mataram</h4>
+            </div>
             <div class="card col">
                 <img class="card-img-top" src="https://source.unsplash.com/300x250?person" alt="Card image" >
                 <div class="card-body col">
@@ -71,17 +92,6 @@
                     <a href="#" class="btn btn-primary">See Profile</a>
                 </div>
             </div>
-            <br>
-            <button type="button" class="btn btn-danger ml-2" style="width:330px">
-                <i class="fab fa-instagram"> instagram</i>
-            </button>
-            <button type="button" class="btn btn-primary mt-1 ml-2" style="width:330px">
-                <i class="fab fa-facebook-square"> Facebook</i>
-            </button>
-            <button type="button" class="btn btn-info mt-1 ml-2" style="width:330px">
-                <i class="fab fa-twitter-square"> Twitter</i>
-            </button>
-            <p></p>
         </div>
     </div>
     <br>

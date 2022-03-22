@@ -9,12 +9,24 @@
                 <li class="nav-item">
                     <a class="nav-link {{($active==="home")?'active':''}}" aria-current="page" href="/">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link {{($active==="about")?'active':''}}" href="/about">About</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Profile
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <li><a class="dropdown-item" href="/sejarah">Sejarah</a></li>
+                      <li><a class="dropdown-item" href="/visiMisi">Visi Misi</a></li>
+                      <li><a class="dropdown-item" href="/tentangBapelkes">Tentang Bapelkes</a></li>
+                      <li><a class="dropdown-item" href="/struktur">Struktur Organisasi</a></li>
+                      <li><a class="dropdown-item" href="/sdm">SDM</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{($active==="blog")?'active':''}}" href="/posts">Post</a>
+                    <a class="nav-link {{($active==="blog")?'active':''}}" href="/publikasi">Publikasi</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link {{($active==="category")?'active':''}}" href="/categories">Pelatihan</a>
+              </li>
                 <li class="nav-item">
                     <a class="nav-link {{($active==="category")?'active':''}}" href="/categories">Category</a>
                 </li>

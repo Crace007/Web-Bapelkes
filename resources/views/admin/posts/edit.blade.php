@@ -5,7 +5,18 @@
     <h1 class="h2 mb-2">Edit Post</h1>
     <a href="/admin/posts" class="link-secondary"><span data-feather="arrow-left"></span> Back to Post Page</a>
 </div>
-
+@if (session()->has('success'))
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{session('success')}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+@endif
+@if (session()->has('destroy'))
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  {{session('destroy')}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
 <div class="col-lg-8">
     <form method="post" action="/admin/posts/{{ $post->slug }}" enctype="multipart/form-data">
         @method('put')
@@ -39,21 +50,52 @@
                 @endif
               @endforeach
           </select>
-        </div>
-        <div class="mb-3">
-          <label for="image" class="form-label">Post Image</label>
-          <input type="hidden" name="oldImage" value="{{$post->image}}">
-          @if ($post->image)
-            <img src=" {{ asset('storage/'. $post->image) }} " class="img-preview img-fluid mb-3 col-sm-5 d-block" alt="">
-          @else
-            <img src="" class="img-preview img-fluid mb-3 col-sm-5" alt="">
-          @endif
-          <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" onchange="previewImage()">
-          @error('image')
+          @error('category_id')
             <div class="invalid-feedback">
               {{$message}}
             </div>
           @enderror
+        </div>
+        <div class="mb-3">
+          <label for="image" class="form-label">Post Image</label>
+          <input type="file" class="form-control @error('file_name') is-invalid @enderror" id="image" name="file_name[]" multiple onchange="previewImage()">
+          @error('file_name')
+            <div class="invalid-feedback">
+              {{$message}}
+            </div>
+          @enderror
+        </div>
+        <div class="row">      
+          @foreach ($postimg as $image)
+            <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                <div style="max-height: 500px; overflow: hidden; ">
+                  <img class="card-img-top  img-fluid" src="{{ asset('storage/' . $image->file_name) }}" alt="...">
+                </div>
+                <div class="card-body text-center">
+                  <!-- Button Remove trigger modal -->
+                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-{{$image->id}}">
+                    <span data-feather="trash"></span> Remove
+                  </button>
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal-{{$image->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-body">
+                          Are you sure want to remove this image ?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary border-0" data-bs-dismiss="modal">Cancel</button>
+                          <a href="/admin/posts/remove/{{$image->id}}" class="btn btn-success border-0">Confirm</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          @endforeach
         </div>
         <div class="mb-3">
             <label for="body" class="form-label">body</label>

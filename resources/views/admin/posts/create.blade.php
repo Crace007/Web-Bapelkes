@@ -30,6 +30,7 @@
         <div class="mb-3">
           <label for="Category" class="form-label">Category</label>
           <select class="form-select" name="category_id">
+            <option></option>
               @foreach ($categories as $category)
                 @if (old('category_id') == $category->id)
                   <option value="{{$category->id}}" selected> {{$category->name}} </option>
@@ -38,12 +39,17 @@
                 @endif
               @endforeach
           </select>
+          @error('category_id')
+            <div class="invalid-feedback">
+              {{$message}}
+            </div>
+          @enderror
         </div>
         <div class="mb-3">
           <label for="image" class="form-label">Post Image</label>
           <img src="" class="img-preview img-fluid mb-3 col-sm-5" alt="">
-          <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" onchange="previewImage()">
-          @error('image')
+          <input type="file" class="form-control @error('file_name') is-invalid @enderror" id="image" name="file_name[]" multiple onchange="previewImage()">
+          @error('file_name')
             <div class="invalid-feedback">
               {{$message}}
             </div>

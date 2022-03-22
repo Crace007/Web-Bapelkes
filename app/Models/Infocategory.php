@@ -2,19 +2,18 @@
 
 namespace App\Models;
 
-use App\Models\Post;
+use App\Models\Otherinfo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Category extends Model
+class Infocategory extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
 
-
-
-    public function posts()
+    public function otherinfo()
     {
-        return $this->hasMany(Post::class);
+        return $this->HasMany(Otherinfo::class);
     }
 }

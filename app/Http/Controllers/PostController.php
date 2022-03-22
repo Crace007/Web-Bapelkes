@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Imagepost;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Cviebrock\EloquentSluggable\Services\SlugService;
+use Faker\Provider\Image;
 
 class PostController extends Controller
 {
@@ -19,7 +21,7 @@ class PostController extends Controller
     public function index()
     {
         return view('admin.posts.index', [
-            'posts' => Post::where('user_id', auth()->user()->id)->get(),
+            'posts' => Post::latest()->where('user_id', auth()->user()->id)->get(),
             'allposts'   => Post::all()
         ]);
     }
@@ -44,22 +46,36 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $validate = $request->validate([
+
+        $request->validate([
             'title'         => 'required|max:255',
-            'slug'          => 'required|unique:posts',
+            'slug'          => 'required|unique:posts,slug',
             'category_id'   => 'required',
-            'image'         => 'required|image|file|max:1024',
+            'file_name'     => 'required|max:10240',
+            'file_name.*'   => 'mimes:jpg,jpeg,png,bmp',
             'body'          => 'required'
         ]);
 
-        if ($request->file('image')) {
-            $validate['image'] = $request->file('image')->store('post-image');
-        }
+        // dd($request);
 
-        $validate['user_id'] = auth()->user()->id;
-        $validate['excerpt'] = Str::limit(strip_tags($request->body), 150, '...');
+        $validate = [
+            'title'         => $request->title,
+            'slug'          => $request->slug,
+            'category_id'   => $request->category_id,
+            'body'          => $request->body,
+            'user_id'       => auth()->user()->id,
+            'excerpt'       => Str::limit(strip_tags($request->body), 150, '...')
+        ];
 
-        Post::create($validate);
+        if ($request->file('file_name')) {
+            $postId = Post::create($validate)->id;
+            foreach ($request->file('file_name') as $key) {
+                # code...
+                $image['file_name'] = $key->store('post_image');
+                $image['post_id'] =  $postId;
+                Imagepost::create($image);
+            }
+        };
 
         return redirect('/admin/posts')->with('success', 'New Post Has Been Added!');
     }
@@ -73,7 +89,8 @@ class PostController extends Controller
     public function show(Post $post)
     {
         return view('admin.posts.show', [
-            'post' => $post
+            'post' => $post,
+            'postimg' => Imagepost::where('post_id', $post->id)->get(),
         ]);
     }
 
@@ -87,6 +104,7 @@ class PostController extends Controller
     {
         return view('admin.posts.edit', [
             'categories' => Category::all(),
+            'postimg' => Imagepost::where('post_id', $post->id)->get(),
             'post'  => $post
         ]);
     }
@@ -100,10 +118,12 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+
         $rules = [
             'title'         => 'required|max:255',
             'category_id'   => 'required',
-            'image'         => 'required|image|file|max:1024',
+            'file_name'     => 'max:10240',
+            'file_name.*'   => 'mimes:jpg,jpeg,png,bmp',
             'body'          => 'required'
         ];
 
@@ -111,22 +131,31 @@ class PostController extends Controller
             $rules['slug'] = 'required|unique:posts';
         }
 
-        $validate =  $request->validate($rules);
+        $request->validate($rules);
 
-        if ($request->file('image')) {
-            if ($request->oldImage) {
-                Storage::delete($request->oldImage);
+        $validate =  [
+            'title'         => $request->title,
+            'category_id'   => $request->category_id,
+            'body'          => $request->body,
+            'slug'          => $request->slug,
+            'user_id'       => auth()->user()->id,
+            'excerpt'       => Str::limit(strip_tags($request->body), 150, '...')
+        ];
+
+
+        if ($request->file('file_name')) {
+            foreach ($request->file('file_name') as $key) {
+                # code...
+                $image['file_name'] = $key->store('post_image');
+                $image['post_id'] =  $post->id;
+                Imagepost::create($image);
             }
-            $validate['image'] = $request->file('image')->store('post-image');
-        }
-
-        $validate['user_id'] = auth()->user()->id;
-        $validate['excerpt'] = Str::limit(strip_tags($request->body), 150, '...');
+        };
 
         Post::where('id', $post->id)
             ->update($validate);
 
-        return redirect('/dashboard/posts')->with('success', 'New Post Has Been Updated!');
+        return redirect('/admin/posts/' . $request->slug . '/edit')->with('success', 'The Selected Post Has Been Updated!');
     }
 
     /**
@@ -141,12 +170,19 @@ class PostController extends Controller
             Storage::delete($post->image);
         }
         Post::destroy($post->id);
-        return redirect('/dashboard/posts')->with('destroy', 'Post Has Been Deleted!');
+        return redirect('/admin/posts')->with('destroy', 'The Selected Post Has Been Deleted!');
     }
 
     public function checkSlug(Request $request)
     {
         $slug = SlugService::createSlug(Post::class, 'slug', $request->title);
         return response()->json(['slug' => $slug]);
+    }
+
+    public  function removeimg(Imagepost $images)
+    {
+        Storage::delete($images->file_name);
+        Imagepost::destroy($images->id);
+        return redirect()->back()->with('destroy', 'The Selected Image Has Been Removed!')->withInput();
     }
 }

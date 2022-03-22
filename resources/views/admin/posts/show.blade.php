@@ -16,10 +16,21 @@
             <article>
                 <h1 class="mt-3">{{$post->title}}</h1>
                 <p>Kategory : <a href="/blog?category={{$post->category->slug}}" class="text-decoration-none">{{$post->category->name}}</a></p>
-                @if ($post->image)
-                <div style="max-height: 300px; overflow: hidden; ">
-                    <img class="card-img-top" src="{{ asset('storage/' . $post->image) }}" alt="{{$post->category->name}}">
+                @if ($postimg)
+                <div class="row">
+                    @foreach ($postimg as $image)
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div style="max-height: 600px; overflow: hidden; ">
+                                    <img class="card-img-top  img-fluid" src="{{ asset('storage/' . $image->file_name) }}" alt="...">
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
+                {{-- <div style="max-height: 300px; overflow: hidden; ">
+                    <img class="card-img-top" src="{{ asset('storage/' . $post->image) }}" alt="{{$post->category->name}}">
+                </div> --}}
                 @else
                     <img class="card-img-top" src="https://source.unsplash.com/1200x300?{{$post->category->name}}" alt="{{$post->category->name}}">
                 @endif
