@@ -22,7 +22,7 @@ class PostController extends Controller
     {
         return view('admin.posts.index', [
             'posts' => Post::latest()->where('user_id', auth()->user()->id)->get(),
-            'allposts'   => Post::all()
+            'allposts'   => Post::latest()->get()
         ]);
     }
 
@@ -46,10 +46,10 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'title'         => 'required|max:255',
             'slug'          => 'required|unique:posts,slug',
+            'dateactivity'  => 'required',
             'category_id'   => 'required',
             'file_name'     => 'required|max:10240',
             'file_name.*'   => 'mimes:jpg,jpeg,png,bmp',
@@ -61,6 +61,7 @@ class PostController extends Controller
         $validate = [
             'title'         => $request->title,
             'slug'          => $request->slug,
+            'dateactivity'  => $request->dateactivity,
             'category_id'   => $request->category_id,
             'body'          => $request->body,
             'user_id'       => auth()->user()->id,
@@ -102,6 +103,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        dd($post);
         return view('admin.posts.edit', [
             'categories' => Category::all(),
             'postimg' => Imagepost::where('post_id', $post->id)->get(),
@@ -121,6 +123,7 @@ class PostController extends Controller
 
         $rules = [
             'title'         => 'required|max:255',
+            'dateactivity'  => 'required',
             'category_id'   => 'required',
             'file_name'     => 'max:10240',
             'file_name.*'   => 'mimes:jpg,jpeg,png,bmp',
@@ -135,6 +138,7 @@ class PostController extends Controller
 
         $validate =  [
             'title'         => $request->title,
+            'dateactivity'  => $request->dateactivity,
             'category_id'   => $request->category_id,
             'body'          => $request->body,
             'slug'          => $request->slug,
@@ -166,8 +170,12 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        if ($post->image) {
-            Storage::delete($post->image);
+        $tagetimg = Imagepost::all();
+        foreach ($tagetimg as $img) {
+            if ($img->user_id === $post->id) {
+                Storage::delete($img->file_name);
+                Imagepost::destroy($img->id);
+            }
         }
         Post::destroy($post->id);
         return redirect('/admin/posts')->with('destroy', 'The Selected Post Has Been Deleted!');

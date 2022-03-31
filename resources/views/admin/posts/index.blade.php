@@ -17,7 +17,7 @@
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
-<div class="col-sm-8">
+<div class="col-md-11">
 <div class="table-responsive">
     <table class="table table-striped table-sm">
       <thead>
@@ -29,7 +29,7 @@
         </tr>
       </thead>
       <tbody>
-          @foreach ($posts as $post)        
+          @foreach ($allposts as $post)        
           <tr>
             <td>{{$loop->iteration}}</td>
             <td>{{$post->title}}</td>

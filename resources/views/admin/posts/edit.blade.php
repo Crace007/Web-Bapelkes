@@ -3,7 +3,7 @@
 
 <div class="pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2 mb-2">Edit Post</h1>
-    <a href="/admin/posts" class="link-secondary"><span data-feather="arrow-left"></span> Back to Post Page</a>
+    <a href="/admin/profile" class="link-secondary"><span data-feather="arrow-left"></span> Back to Profile</a>
 </div>
 @if (session()->has('success'))
   <div class="alert alert-success alert-dismissible fade show" role="alert">

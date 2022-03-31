@@ -1,14 +1,18 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\InfocategoryController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\OtherinfoController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\RegisterController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\OtherinfoController;
+use App\Http\Controllers\InfocategoryController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\RankcategoryController;
+use App\Http\Controllers\JobcategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,11 +52,24 @@ Route::get('admin/posts/remove/{images:id}', [PostController::class, 'removeimg'
 
 Route::resource('/admin/posts', PostController::class)->middleware('auth');
 Route::resource('/admin/otherinfos', OtherinfoController::class)->middleware('auth');
+Route::resource('/admin/employees', EmployeeController::class)->middleware('auth');
 
 Route::resource('/admin/categories', CategoryController::class, [
     'except' => ['show']
 ])->middleware('auth');
 
 Route::resource('/admin/infocategories', InfocategoryController::class, [
+    'except' => ['show']
+])->middleware('auth');
+
+Route::resource('/admin/users', UserController::class, [
+    'except' => ['show']
+])->middleware('auth');
+
+Route::resource('/admin/rankcategories', RankcategoryController::class, [
+    'except' => ['show']
+])->middleware('auth');
+
+Route::resource('/admin/jobcategories', JobcategoryController::class, [
     'except' => ['show']
 ])->middleware('auth');

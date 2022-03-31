@@ -44,7 +44,7 @@ class InfocategoryController extends Controller
 
         Infocategory::create($validate);
 
-        return redirect('/admin/categoryinfos')->with('success', 'New Info Category Has Been Added!');
+        return redirect('/admin/infocategories')->with('success', 'New Info Category Has Been Added!');
     }
 
     /**

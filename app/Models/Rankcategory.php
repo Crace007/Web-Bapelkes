@@ -2,17 +2,17 @@
 
 namespace App\Models;
 
-use App\Models\Post;
+use App\Models\Employee;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Rankcategory extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
 
-    public function posts()
+    public function employee()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Employee::class);
     }
 }

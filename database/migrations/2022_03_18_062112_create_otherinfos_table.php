@@ -17,7 +17,7 @@ class CreateOtherinfosTable extends Migration
             $table->id();
             $table->foreignId('infocategory_id');
             $table->string('title');
-            $table->string('descirption');
+            $table->text('description');
             $table->string('image');
             $table->timestamps();
         });

@@ -35,7 +35,7 @@
                 @auth
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Welcome back, {{auth()->user()->username}}
+                      {{auth()->user()->username}}
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <li><a class="dropdown-item" href="/admin"><i class="bi bi-card-checklist"></i> Admin Page</a></li>

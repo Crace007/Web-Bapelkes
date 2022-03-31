@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 @section('content')
 <div class="pt-3 pb-2 mb-3 border-bottom">
-    <a href="/admin/infocategories/create" class="btn btn-primary">Add kategori info</a>
+    <a href="/admin/jobcategories/create" class="btn btn-primary">List Kategori Pangkat </a>
   </div>
   
   @if (session()->has('success'))
@@ -31,11 +31,11 @@
             @foreach ($data as $category)        
             <tr>
               <td>{{$loop->iteration}}</td>
-              <td>{{$category->name}}</td>
+              <td>{{$category->nama_jabatan}}</td>
               <td>{{$category->slug}}</td>
               <td>
-                  <a href="/admin/infocategories/{{$category->id}}/edit" class="badge bg-primary"> <span data-feather="edit"></span> </a>
-                  <form action="/admin/infocategories/{{$category->id}}" method="POST" class="d-inline">
+                  <a href="/admin/jobcategories/{{$category->id}}/edit" class="badge bg-primary"> <span data-feather="edit"></span> </a>
+                  <form action="/admin/jobcategories/{{$category->id}}" method="POST" class="d-inline">
                     @method('delete')
                     @csrf
                     <button class="badge bg-danger border-0" onclick="return confirm('Are You Sure ?')"><span data-feather="trash"></span></button>
