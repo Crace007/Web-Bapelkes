@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Imagepost;
-use App\Models\Category;
+use App\Models\Postcategory;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -34,7 +34,7 @@ class PostController extends Controller
     public function create()
     {
         return view('admin.posts.create', [
-            'categories' => Category::all()
+            'categories' => Postcategory::all()
         ]);
     }
 
@@ -55,21 +55,20 @@ class PostController extends Controller
             'file_name.*'   => 'mimes:jpg,jpeg,png,bmp',
             'body'          => 'required'
         ]);
+        // dd($request->title);
 
-        // dd($request);
-
-        $validate = [
+        $data = [
             'title'         => $request->title,
             'slug'          => $request->slug,
             'dateactivity'  => $request->dateactivity,
             'category_id'   => $request->category_id,
             'body'          => $request->body,
             'user_id'       => auth()->user()->id,
-            'excerpt'       => Str::limit(strip_tags($request->body), 150, '...')
+            'excerpt'       => Str::limit(strip_tags($request->body), 150, '...'),
         ];
 
         if ($request->file('file_name')) {
-            $postId = Post::create($validate)->id;
+            $postId = Post::create($data)->id;
             foreach ($request->file('file_name') as $key) {
                 # code...
                 $image['file_name'] = $key->store('post_image');
@@ -103,9 +102,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        dd($post);
+        // dd($post);
         return view('admin.posts.edit', [
-            'categories' => Category::all(),
+            'categories' => Postcategory::all(),
             'postimg' => Imagepost::where('post_id', $post->id)->get(),
             'post'  => $post
         ]);
@@ -131,12 +130,12 @@ class PostController extends Controller
         ];
 
         if ($request->slug != $post->slug) {
-            $rules['slug'] = 'required|unique:posts';
+            $rules['slug'] = 'required|unique:posts,slug';
         }
 
         $request->validate($rules);
 
-        $validate =  [
+        $data =  [
             'title'         => $request->title,
             'dateactivity'  => $request->dateactivity,
             'category_id'   => $request->category_id,
@@ -157,7 +156,7 @@ class PostController extends Controller
         };
 
         Post::where('id', $post->id)
-            ->update($validate);
+            ->update($data);
 
         return redirect('/admin/posts/' . $request->slug . '/edit')->with('success', 'The Selected Post Has Been Updated!');
     }

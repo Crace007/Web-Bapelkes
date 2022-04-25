@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 @section('content')
 <div class="pt-3 pb-2 mb-3 border-bottom">
-    <a href="/admin/categories/create" class="btn btn-primary">Add Categories</a>
+    <a href="/admin/postcategories/create" class="btn btn-primary">Add Categories</a>
   </div>
   
   @if (session()->has('success'))
@@ -34,8 +34,8 @@
               <td>{{$category->name}}</td>
               <td>{{$category->slug}}</td>
               <td>
-                  <a href="/admin/categories/{{$category->id}}/edit" class="badge bg-primary"> <span data-feather="edit"></span> </a>
-                  <form action="/admin/categories/{{$category->id}}" method="POST" class="d-inline">
+                  <a href="/admin/postcategories/{{$category->id}}/edit" class="badge bg-primary"> <span data-feather="edit"></span> </a>
+                  <form action="/admin/postcategories/{{$category->id}}" method="POST" class="d-inline">
                     @method('delete')
                     @csrf
                     <button class="badge bg-danger border-0" onclick="return confirm('Are You Sure ?')"><span data-feather="trash"></span></button>

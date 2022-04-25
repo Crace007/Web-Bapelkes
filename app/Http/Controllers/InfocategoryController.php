@@ -14,7 +14,7 @@ class InfocategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.categoryinfos.index', [
+        return view('admin.kategori.category_info.index', [
             'data'  => Infocategory::all()
         ]);
     }
@@ -26,7 +26,7 @@ class InfocategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categoryinfos.create');
+        return view('admin.kategori.category_info.create');
     }
 
     /**
@@ -66,7 +66,7 @@ class InfocategoryController extends Controller
      */
     public function edit(Infocategory $infocategory)
     {
-        return view('admin.categoryinfos.edit', [
+        return view('admin.kategori.category_info.edit', [
             'category'  => $infocategory
         ]);
     }

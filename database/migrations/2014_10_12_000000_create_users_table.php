@@ -19,13 +19,16 @@ class CreateUsersTable extends Migration
             $table->string('photo_profile')->nullable();
             $table->string('name');
             $table->string('username')->unique();
+            $table->string('slug')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
             $table->string('jenis_kelamin');
             $table->integer('umur');
+            $table->string('status_hubungan')->nullable();
             $table->string('status_pekerjaan');
+            $table->text('about')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

@@ -3,11 +3,10 @@
 <div class="row mt-2">
     <div class="col-lg-8 mb-2">
         <div class="card">
-            <div class="card-body">
-                <article>
-                    <h3 class="">{{$post->title}}</h3>
-                    <small class="text-muted">By : <a href="/posts?author={{$post->user->username}}" class="text-decoration-none text-dark">{{$post->user->name}}</a>,</small>
-                    <small class="text-muted">Kategory : <a href="/posts?category={{$post->category->slug}}" class="text-decoration-none text-dark">{{$post->category->name}}</a></small>
+            <div class="card-body ">
+                    <h3 class="" style="text-transform: uppercase">{{$post->title}}</h3>
+                    <small class="text-muted">By : <a href="/publikasi?author={{$post->user->username}}" class="text-decoration-none text-title">{{$post->user->name}}</a>,</small>
+                    <small class="text-muted">Kategory : <a href="/publikasi?category={{$post->category->slug}}" class="text-decoration-none text-title">{{$post->category->name}}</a></small>
                     <hr>
                     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
@@ -29,8 +28,7 @@
                           <span class="visually-hidden">Next</span>
                         </button>
                     </div>
-                    <p class="mt-3">{!! $post->body !!} </p>
-                </article>
+                    <p class="mt-3" style="text-align: justify">{!! $post->body !!} </p>
             </div>
           </div>
     </div>
@@ -44,11 +42,11 @@
                     @if ($p->id === $post->id)
                         @continue
                     @else
-                    <div class="card mb-1">
+                    <div class="card show-post mb-1 p-2">
                         @foreach ($imageposts as $img)
                             @if ($img->post_id === $p->id)
                                 <a href="/show/{{$p->slug}}" class="text-center">
-                                    <img src="{{asset('storage/' . $img->file_name)}}" class="img-fluid rounded-start w-50 h-50" alt="...">
+                                    <img src="{{asset('storage/' . $img->file_name)}}" class="img-fluid rounded-start w-50 h-50" style="border-radius: 5px" alt="...">
                                 </a>
                                 @break                                        
                             @endif
@@ -61,37 +59,10 @@
                         @endforeach
                         
                         <div class="card-body">
-                            <b class="card-title"><a href="/show/{{$p->slug}}" class="text-decoration-none text-dark">{{$p->title}}</a></b>
-                            <p class="card-text"><small>{{$p->excerpt}}</small></p>
+                            <b class="card-title"><a href="/show/{{$p->slug}}" class="text-decoration-none" style="text-transform: uppercase">{{$p->title}}</a></b>
+                            <p class="card-text" style="text-align: justify"><small>{{$p->excerpt}}</small></p>
                         </div>
                     </div>
-
-                    {{-- <div class="card" style="max-width: 540px;">
-                        <div class="row g-0">
-                        <div class="col-md-4">
-                            @foreach ($imageposts as $img)
-                                @if ($img->post_id === $p->id)
-                                    <a href="/show/{{$p->slug}}">
-                                        <img src="{{asset('storage/' . $img->file_name)}}" class="img-fluid rounded-start" alt="...">
-                                    </a>
-                                    @break                                        
-                                @endif
-                                
-                                @if ($loop->last)
-                                    <a href="/show/{{$p->slug}}">
-                                        <img class="rounded-start img-fluid" src="https://source.unsplash.com/300x250?general" alt="Los Angeles">
-                                    </a>
-                                @endif
-                            @endforeach
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            </div>
-                        </div>
-                        </div>
-                    </div> --}}
                     @endif
                 @endforeach
             </div>

@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\Infocategory;
 use App\Models\Rankcategory;
 use App\Models\Jobcategory;
+use App\Models\Postcategory;
+use App\Models\Filecategory;
 use Symfony\Polyfill\Intl\Idn\Info;
 
 class DatabaseSeeder extends Seeder
@@ -23,45 +25,67 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         // User::factory(4)->create();
-        Post::factory(20)->create();
+        // Post::factory(20)->create();
 
         User::create([
             'name'              => 'Lalu M. Fatwa Aulia',
             'username'          => 'crace007',
+            'slug'              => 'crace007',
             'email'             => 'fatwa.tkj1@gmail.com',
             'tempat_lahir'      => 'Pejeruk',
             'tanggal_lahir'     => '1999-06-12',
             'jenis_kelamin'      => 'laki-laki',
             'umur'              => '23',
-            'status_pekerjaan'  => 'ASN',
+            'status_pekerjaan'  => 'THL',
+            'status_hubungan'   => 'lanjang',
             'password'          => bcrypt('123akusayang'),
         ]);
 
         User::create([
             'name'              => 'Admin',
             'username'          => 'admin',
+            'slug'              => 'admin',
             'email'             => 'bot.bapelkes@gmail.com',
             'tempat_lahir'      => 'bapelkes',
             'tanggal_lahir'     => '2022-3-12',
-            'jenis_kelamin'      => 'laki-laki',
-            'umur'              => '0',
+            'jenis_kelamin'     => 'laki-laki',
+            'umur'              => '1',
             'status_pekerjaan'  => 'ASN',
+            'status_hubungan'   => 'lanjang',
             'password'          => bcrypt('admin'),
         ]);
 
-        Category::create([
-            'name' => 'Web Programming',
-            'slug' => 'web-programming'
+        Filecategory::create([
+            'name'  => 'Sertifikat',
+            'slug'  => 'sertifikat',
+        ]);
+        Filecategory::create([
+            'name'  => 'SK',
+            'slug'  => 'sk',
+        ]);
+        Filecategory::create([
+            'name'  => 'Data Lainnya',
+            'slug'  => 'data-lainnya',
         ]);
 
-        Category::create([
-            'name' => 'Personal',
-            'slug' => 'personal'
+        Postcategory::create([
+            'name' => 'Berita',
+            'slug' => 'berita'
         ]);
 
-        Category::create([
-            'name' => 'General',
-            'slug' => 'general'
+        Postcategory::create([
+            'name' => 'Kegiatan',
+            'slug' => 'kegiatan'
+        ]);
+
+        Postcategory::create([
+            'name' => 'Artikel',
+            'slug' => 'artikel'
+        ]);
+
+        Postcategory::create([
+            'name' => 'Informasi',
+            'slug' => 'informasi'
         ]);
 
         Infocategory::create([

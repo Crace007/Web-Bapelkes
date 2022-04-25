@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use App\Models\Employee;
+use App\Models\Filecategory;
 use App\Models\User;
 use App\Models\Imagepost;
 use App\Models\Post;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -25,6 +28,7 @@ class UserController extends Controller
             'posts'     => Post::latest()->where('user_id', auth()->user()->id)->get(),
             'pegawai'   => Employee::where('id', auth()->user()->employee_id)->get()->first(),
             'user'      => User::all(),
+            'categories' => Filecategory::all(),
         ]);
     }
 
@@ -68,8 +72,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        dd($user);
-        //
+        return view('admin.profile.edit', [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -81,7 +86,19 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $data = $request->validate([
+            'name'              => 'required|max:60',
+            'tempat_lahir'      => 'required',
+            'tanggal_lahir'     => 'required',
+            'jenis_kelamin'     => 'required',
+            'status_hubungan'   => 'required',
+            'about'             => 'max:255',
+        ]);
+
+        User::where('slug', $user->slug)
+            ->update($data);
+
+        return redirect('/admin/users/' . $user->slug . '/edit')->with('success', 'Profile Has Been Updated!');
     }
 
     /**
@@ -93,5 +110,26 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    public function uploadPP(Request $request)
+    {
+        $data = $request->validate([
+            'photo_profile'  => 'max:10240|mimes:jpg,jpeg,png,bmp',
+        ]);
+
+        if ($request->file('photo_profile')) {
+            Storage::delete($request->photoProfile_old);
+            $data['photo_profile'] = $request->file('photo_profile')->store('photo_profile');
+        };
+        User::where('id', $request->user_id)->update($data);
+        return response("data berhasil diubah");
+    }
+
+    public function removePP($users)
+    {
+        $data['photo_profile'] = null;
+        User::where('id', $users)->update($data);
+        return view('admin.profile.index');
     }
 }

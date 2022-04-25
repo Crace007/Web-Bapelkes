@@ -10,7 +10,7 @@
     <form method="post" action="/admin/posts" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
-          <label for="title" class="form-label">Title</label>
+          <label for="title" class="form-label"><Strong>Title</Strong></label>
           <input type="text" class="form-control @error('title') is-invalid @enderror " id="title" name="title" value="{{old('title')}}" required autofocus >
           @error('title')
               <div class="invalid-feedback">
@@ -19,8 +19,8 @@
           @enderror
         </div>
         <div class="mb-3">
-          <label for="slug" class="form-label">Slug</label>
-          <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" value="{{old('slug')}}" required >
+          <label for="slug" class="form-label"><strong>Slug</strong></label>
+          <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" value="{{old('slug')}}" required  readonly>
           @error('slug')
               <div class="invalid-feedback">
                 {{$message}}
@@ -28,7 +28,7 @@
           @enderror
         </div>
         <div class="mb-3">
-          <label for="dateactivity" class="form-label">Date Activity</label>
+          <label for="dateactivity" class="form-label"> <strong>Date Activity</strong></label>
           <input type="date" class="form-control @error('dateactivity') is-invalid @enderror" id="dateactivity" name="dateactivity" value="{{old('dateactivity')}}" required >
           @error('dateactivity')
               <div class="invalid-feedback">
@@ -37,9 +37,9 @@
           @enderror
         </div>
         <div class="mb-3">
-          <label for="Category" class="form-label">Category</label>
+          <label for="Category" class="form-label"><strong>Category</strong></label>
           <select class="form-select" name="category_id">
-            <option></option>
+            <option value="{{null}}" disabled selected>-- SELECT ONE --</option>
               @foreach ($categories as $category)
                 @if (old('category_id') == $category->id)
                   <option value="{{$category->id}}" selected> {{$category->name}} </option>
@@ -55,9 +55,9 @@
           @enderror
         </div>
         <div class="mb-3">
-          <label for="image" class="form-label">Post Image</label>
-          <img src="" class="img-preview img-fluid mb-3 col-sm-5" alt="">
+          <label for="image" class="form-label"> <strong>Post Image</strong></label>
           <input type="file" class="form-control @error('file_name') is-invalid @enderror" id="image" name="file_name[]" multiple onchange="previewImage()">
+          <img src="" class="img-preview img-fluid mb-3 col-sm-5" alt="">
           @error('file_name')
             <div class="invalid-feedback">
               {{$message}}
@@ -65,14 +65,18 @@
           @enderror
         </div>
         <div class="mb-3">
-            <label for="body" class="form-label">body</label>
-            <input id="body" type="hidden" name="body" value="{{ old('body') }}">
-            <trix-editor input="body"></trix-editor>
+            <label for="body" class="form-label"> <strong>Body</strong> </label>
+            <div class="card p-2">
+              <input type="hidden" name="body" id="body" value="{{ old('body') }}">
+              <trix-editor input="body"></trix-editor>
+            </div>
             @error('body')
                 <p class="text-danger">The body field is required</p>
             @enderror
         </div>
-        <button type="submit" class="btn btn-primary">Add Post</button>
+        <div class="text-end">
+          <button type="submit" class="btn btn-primary">Posting <span data-feather="send"></span></button>
+        </div>
       </form>
 </div>
 

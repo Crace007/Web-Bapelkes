@@ -15,7 +15,7 @@ class RankcategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.sdm.asn.category_pangkat.index', [
+        return view('admin.kategori.category_pangkat.index', [
             'data' => Rankcategory::all()
         ]);
     }
@@ -27,7 +27,7 @@ class RankcategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.sdm.asn.category_pangkat.create');
+        return view('admin.kategori.category_pangkat.create');
     }
 
     /**
@@ -67,7 +67,7 @@ class RankcategoryController extends Controller
      */
     public function edit(Rankcategory $rankcategory)
     {
-        return view('admin.sdm.asn.category_pangkat.edit', [
+        return view('admin.kategori.category_pangkat.edit', [
             'category'  => $rankcategory
         ]);
     }

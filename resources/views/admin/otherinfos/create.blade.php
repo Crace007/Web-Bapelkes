@@ -21,7 +21,7 @@
         <div class="mb-3">
           <label for="Category" class="form-label">Category</label>
           <select class="form-select" name="infocategory_id">
-            <option value="{{null}}">-- SELECT ONE --</option>
+            <option value="{{null}}" disabled selected>-- SELECT ONE --</option>
               @foreach ($infocategories as $category)
                 @if (old('infocategory_id') == $category->id)
                   <option value="{{$category->id}}" selected> {{$category->name}} </option>
@@ -48,8 +48,10 @@
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <input id="description" type="hidden" name="description" value="{{ old('description') }}">
-            <trix-editor input="description"></trix-editor>
+            <div class="card p-2">
+              <input id="description" type="hidden" name="description" value="{{ old('description') }}">
+              <trix-editor input="description"></trix-editor>
+            </div>
             @error('description')
                 <p class="text-danger">The body field is required</p>
             @enderror

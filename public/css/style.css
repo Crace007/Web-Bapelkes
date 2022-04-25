@@ -1,3 +1,86 @@
+body {
+    display:flex; 
+    flex-direction:column; 
+}
+
+footer{
+    margin-top:auto; 
+}
+footer li a{
+    color: #ffffff;
+}
+footer li a:hover{
+    color: #85FFBD;
+}
+
+article .card{
+    border-radius: 15px;
+    margin-bottom: 2px;
+}
+article .card img{
+    border-radius: 15px 15px 0px 0px;
+}
+
+article .card-body a{
+    color: #2a2a2a;
+}
+article .card-body a:hover{
+    color: #10c985;
+}
+
+article .list-post .card{
+    border-radius: 15px;
+    background-color: #f1f1f1;
+    transition: transform .2s; /* Animation */
+    margin: 0 auto;
+}
+article .list-post .card:hover{
+    border-radius: 15px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transform: scale(1.02);
+}
+
+article .list-publish .card{
+    transition: transform .2s; /* Animation */
+    margin: 0 auto;
+    background-color: #f1f1f1;
+}
+
+article .list-publish .card:hover{
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transform: scale(1.05);
+}
+article .card a{
+    color: #2a2a2a;
+}
+article .card a:hover{
+    color: #10c985;
+}
+
+article .show-post{
+    background-color: #ffffff;
+}
+article .show-post:hover{
+    background-color: #f1f1f1;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+article .show-post a{
+    color: #2a2a2a;
+}
+article .show-post a:hover{
+    color: #10c985;
+}
+
+.text-title{
+    color: #2a2a2a;
+}
+.text-title:hover{
+    color: #10c985;
+}
+
 .form-signin {
     width: 100%;
     max-width: 520px;
@@ -52,3 +135,49 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
+
+.content {
+    padding: 16px;
+}
+
+.bg-gradient-jumbotron{
+    background: rgb(123,134,232);
+    background: linear-gradient(326deg, rgba(123,134,232,1) 0%, rgba(246,140,255,1) 52%, rgba(255,222,50,1) 100%);
+    color: #270942;
+}
+
+.bg-gradient-green{
+    background-color: #85FFBD;
+    background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 50%, #ffffff 100%);
+    color: #084012;
+}
+
+.bg-gradient-body{
+    background: rgb(210, 243, 223);
+    background: linear-gradient(135deg, rgb(211, 237, 117) 0%, rgb(116, 223, 157) 50%, rgb(245, 245, 232) 100%);
+    color: #0f2852;
+}
+
+.bg-body{
+    background: rgb(194, 234, 210);
+}
+
+.image-card:hover{
+    background-color: rgb(225, 192, 115);
+}
+
+.font-vagrounded{
+    font-family: VAG Rounded;
+    src: url(//db.onlinewebfonts.com/c/d4280feab480528a5c1b9c7b210e97bd?family=VAG+Rounded);
+}
+
+.zoom {
+    transition: transform .2s; /* Animation */
+    margin: 0 auto;
+}
+  
+.zoom:hover {
+    transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+

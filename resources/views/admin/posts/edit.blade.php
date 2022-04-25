@@ -40,6 +40,15 @@
           @enderror
         </div>
         <div class="mb-3">
+          <label for="dateactivity" class="form-label"> <strong>Date Activity</strong></label>
+          <input type="date" class="form-control @error('dateactivity') is-invalid @enderror" id="dateactivity" name="dateactivity" value="{{old('dateactivity', $post->dateactivity)}}" required >
+          @error('dateactivity')
+              <div class="invalid-feedback">
+                {{$message}}
+              </div>
+          @enderror
+        </div>
+        <div class="mb-3">
           <label for="Category" class="form-label">Category</label>
           <select class="form-select" name="category_id">
               @foreach ($categories as $category)
@@ -99,8 +108,10 @@
         </div>
         <div class="mb-3">
             <label for="body" class="form-label">body</label>
-            <input id="body" type="hidden" name="body" value="{{ old('body', $post->body)}}">
-            <trix-editor input="body"></trix-editor>
+            <div class="card p-2">
+              <input id="body" type="hidden" name="body" value="{{ old('body', $post->body)}}">
+              <trix-editor input="body"></trix-editor>
+            </div>
             @error('body')
                 <p class="text-danger">The body field is required</p>
             @enderror

@@ -53,8 +53,8 @@ class OtherinfoController extends Controller
 
         if ($request->file('image')) {
             $validate['image'] = $request->file('image')->store('infopost_image');
-            Otherinfo::create($validate);
         };
+        Otherinfo::create($validate);
 
         return redirect('/admin/otherinfos')->with('success', 'New Info Post Has Been Added!');
     }

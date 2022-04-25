@@ -3,7 +3,7 @@
 
 <div class="pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2 mb-2">Edit Category</h1>
-    <a href="/admin/categories" class="link-secondary"><span data-feather="arrow-left"></span> Back to Categories Page</a>
+    <a href="/admin/postcategories" class="link-secondary"><span data-feather="arrow-left"></span> Back to Categories Page</a>
 </div>
 @if (session()->has('success'))
   <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -18,7 +18,7 @@
 </div>
 @endif
 <div class="col-lg-8">
-    <form method="post" action="/admin/categories/{{ $category->id }}">
+    <form method="post" action="/admin/postcategories/{{ $category->id }}">
         @method('put')
         @csrf
         <div class="mb-3">

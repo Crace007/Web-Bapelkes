@@ -16,6 +16,7 @@ class CreateTrainingschedulesTable extends Migration
         Schema::create('trainingschedules', function (Blueprint $table) {
             $table->id();
             $table->string('nama_pelatihan');
+            $table->string('slug')->unique();
             $table->integer('jumlah_peserta');
             $table->date('tanggal_start');
             $table->date('tanggal_end');
@@ -23,10 +24,11 @@ class CreateTrainingschedulesTable extends Migration
             $table->integer('lama_hari');
             $table->string('metode');
             $table->string('instansi_penyelenggara');
+            $table->string('tempat_penyelenggaraan');
             $table->string('sumber_dana');
-            $table->foreignId('pengendaliPelatihan_id');
-            $table->foreignId('penanggungJawab_id');
-            $table->foreignId('ketuaPanitia_id');
+            $table->foreignId('pengendaliPelatihan_id')->nullable();
+            $table->foreignId('penanggungJawab_id')->nullable();
+            $table->foreignId('ketuaPanitia_id')->nullable();
             $table->string('keterangan')->nullable();
             $table->timestamps();
         });

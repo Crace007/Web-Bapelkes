@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOtherinfosTable extends Migration
+class CreatePostcategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateOtherinfosTable extends Migration
      */
     public function up()
     {
-        Schema::create('otherinfos', function (Blueprint $table) {
+        Schema::create('postcategories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('infocategory_id');
-            $table->string('title');
-            $table->text('description');
-            $table->string('image')->nullable();
+            $table->string('name')->unique();
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateOtherinfosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('otherinfos');
+        Schema::dropIfExists('postcategories');
     }
 }

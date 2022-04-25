@@ -48,8 +48,10 @@
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">description</label>
-            <input id="description" type="hidden" name="description" value="{{ old('description', $info->description)}}">
-            <trix-editor input="description"></trix-editor>
+            <div class="card p-2">
+              <input id="description" type="hidden" name="description" value="{{ old('description', $info->description)}}">
+              <trix-editor input="description"></trix-editor>
+            </div>
             @error('description')
                 <p class="text-danger">The body field is required</p>
             @enderror

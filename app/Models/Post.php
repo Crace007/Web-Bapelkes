@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Category;
+use App\Models\Postcategory;
 use App\Models\User;
 use App\Models\Imagepost;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -27,7 +27,7 @@ class Post extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Postcategory::class);
     }
 
     public function user()

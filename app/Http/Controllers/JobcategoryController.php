@@ -14,7 +14,7 @@ class JobcategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.sdm.asn.category_jabatan.index', [
+        return view('admin.kategori.category_jabatan.index', [
             'data'  => Jobcategory::latest()->get()
         ]);
     }
@@ -26,7 +26,7 @@ class JobcategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.sdm.asn.category_jabatan.create');
+        return view('admin.kategori.category_jabatan.create');
     }
 
     /**
@@ -66,7 +66,7 @@ class JobcategoryController extends Controller
      */
     public function edit(Jobcategory $jobcategory)
     {
-        return view('admin.sdm.asn.category_jabatan.edit', [
+        return view('admin.kategori.category_jabatan.edit', [
             'category'  => $jobcategory
         ]);
     }

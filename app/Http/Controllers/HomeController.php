@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Otherinfo;
 use App\Models\Infocategory;
 use App\Models\Post;
-use App\Models\Category;
+use App\Models\Postcategory;
 use App\Models\User;
 use App\Models\Imagepost;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use Symfony\Polyfill\Intl\Idn\Info;
 
@@ -25,7 +26,7 @@ class HomeController extends Controller
         }
 
         if (request('category')) {
-            $category = Category::firstWhere('slug', request('category'));
+            $category =  Postcategory::firstWhere('slug', request('category'));
             $title = ' in ' . $category->name;
         }
         if (request('author')) {
@@ -97,6 +98,33 @@ class HomeController extends Controller
         return view('guest.profile.tentang', [
             'title' => 'Sejarah Bapelkes',
             'active' => 'profile'
+        ]);
+    }
+
+    public function sdm()
+    {
+        return view('guest.profile.sdm', [
+            'title' => 'SDM',
+            'sdm_asn' => Employee::all()
+        ]);
+    }
+
+    public function publikasi()
+    {
+        $title = '';
+        if (request('category')) {
+            $category = Postcategory::firstWhere('slug', request('category'));
+            $title = ' in ' . $category->name;
+        }
+        if (request('author')) {
+            $author = User::firstWhere('username', request('author'));
+            $title = ' by ' . $author->name;
+        }
+
+        return view('guest.publikasi.index', [
+            'title' => "All Post" . $title,
+            'image' => Imagepost::all(),
+            'posts' => post::latest()->filter(request(['search', 'category', 'author']))->paginate(7)->withQueryString()
         ]);
     }
 }
