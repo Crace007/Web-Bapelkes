@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Jobcategory;
 use App\Models\Rankcategory;
 use App\Models\Employee;
+use App\Models\Fileuser;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -58,6 +59,7 @@ class EmployeeController extends Controller
 
         $dataPegawai = [
             'nip'                       => $request->nip,
+            'user_id'                   => $request->user_id,
             'pangkat_id'                => $request->pangkat_id,
             'jabatan_id'                => $request->jabatan_id,
             'tanggal_pangkat'           => $request->tanggal_pangkat,
@@ -93,6 +95,7 @@ class EmployeeController extends Controller
     {
         return view('admin.sdm.asn.show', [
             'data' => $employee,
+            // 'filepersonal'  => Fileuser::where('user_id', $employee->user_id )->get(),
         ]);
     }
 

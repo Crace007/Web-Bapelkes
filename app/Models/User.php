@@ -4,12 +4,13 @@ namespace App\Models;
 
 use App\Models\Post;
 use App\Models\Employee;
+use App\Models\Trainingschedule;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 
 class User extends Authenticatable
 {
@@ -64,5 +65,21 @@ class User extends Authenticatable
     public function employee()
     {
         return $this->hasOne(Employee::class);
+    }
+
+    public function Fileuser()
+    {
+        return $this->belongsTo(Fileuser::class);
+    }
+
+    public function trainingschedule()
+    {
+        return $this->hasMany(Trainingschedule::class);
+    }
+
+    public function getCreatedAtAttribute()
+    {
+        return Carbon::parse($this->attributes['tanggal_lahir'])
+            ->translatedFormat('l, d F Y');
     }
 }

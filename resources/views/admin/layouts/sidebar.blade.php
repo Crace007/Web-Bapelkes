@@ -4,7 +4,7 @@
     <div class="sidebar-sticky pt-4">
       <hr>
       <a href="/" class="d-flex sidebar-heading p-1 text-white text-decoration-none">
-        <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
+        <img src="{{ asset('storage/default_image/logolight.png')}}" class="bi me-2" width="35" height="27" alt="">
         <span class="fs-6">Bapelkes Mataram</span>
       </a>
       <hr>
@@ -19,18 +19,21 @@
             Home
           </a>
         </li>
+
         <li class="nav-item">
           <a href="/admin/posts" class="nav-link text-light {{Request::is('admin/posts*') ? 'active' : ''}}">
             <span data-feather="file-text"></span>
             Post
           </a>
         </li>
+
         <li class="nav-item">
           <a href="/admin/trainingschedule" class="nav-link text-light {{Request::is('admin/trainingschedule*') ? 'active' : ''}}">
             <span data-feather="calendar"></span>
             Jadwal Pelatihan
           </a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link text-light dropdown-toggle collapsed {{Request::is('admin/employees*') ? 'active' : Request::is('admin/thl*') ? 'active' : ''}}" data-bs-toggle="collapse" data-bs-target="#sdm-collapse" aria-expanded="false">
             <span data-feather="users"></span>
@@ -39,7 +42,20 @@
           <div class="collapse {{Request::is('admin/employees*') ? 'show' : Request::is('admin/thl*') ? 'show' : ''}}" id="sdm-collapse">
             <ul class="fw-normal btn-toggle-nav pb-1">
               <li><a href="/admin/employees" class="categoryList {{Request::is('admin/employees*') ? 'active' : ''}} link-light rounded">ASN</a></li>
-              <li><a href="/admin/thl" class="categoryList {{Request::is('admin/thl*') ? 'active' : ''}} link-light rounded">THL</a></li>
+              <li><a href="/admin/thl" class="categoryList {{Request::is('admin/thl*') ? 'active' : ''}} link-light rounded">P3K</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link text-light dropdown-toggle collapsed {{Request::is('admin/sarana*') ? 'active' : Request::is('admin/iventaris*') ? 'active' : ''}}" data-bs-toggle="collapse" data-bs-target="#sarpras-collapse" aria-expanded="false">
+            <span data-feather="inbox"></span>
+            Sarpras
+          </a>
+          <div class="collapse {{Request::is('admin/sarana*') ? 'show' : Request::is('admin/iventaris*') ? 'show' : ''}}" id="sarpras-collapse">
+            <ul class="fw-normal btn-toggle-nav pb-1">
+              <li><a href="/admin/sarana" class="categoryList {{Request::is('admin/sarana*') ? 'active' : ''}} link-light rounded">Sarana</a></li>
+              <li><a href="/admin/iventaris" class="categoryList {{Request::is('admin/iventaris*') ? 'active' : ''}} link-light rounded">Iventaris</a></li>
             </ul>
           </div>
         </li>
@@ -85,7 +101,28 @@
             <span data-feather="info"></span>
             Web Information
           </a>
-        </li>   
+        </li>
+
+        <li class="nav-item">
+          <a href="/admin/mitra" class="nav-link text-light {{Request::is('admin/mitra*') ? 'active' : ''}}">
+            <span data-feather="share-2"></span>
+            Mitra Kerja
+          </a>
+        </li>
+        
+        <li class="nav-item">
+          <a href="/admin/info/users" class="nav-link text-light {{Request::is('admin/info/users*') ? 'active' : ''}}">
+            <span data-feather="user"></span>
+              User Info
+          </a>
+        </li> 
+
+        <li class="nav-item">
+          <a href="/admin/role" class="nav-link text-light {{Request::is('admin/role*') ? 'active' : ''}}">
+            <span data-feather="shield"></span>
+              Role User
+          </a>
+        </li> 
       </ul>          
     </div>
     <hr>
@@ -100,7 +137,7 @@
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser">
         <li><a class="dropdown-item" href="/admin/posts/create" type="button"><span data-feather="plus"></span> New Post</a></li>
-        <li><a class="dropdown-item" href="#" type="button"><span data-feather="settings"></span> Settings</a></li>
+        <li><a class="dropdown-item" href="/admin/users/setting" type="button"><span data-feather="settings"></span> Settings</a></li>
         <li><a href="/admin/users" class="dropdown-item" type="button"><span data-feather="user"></span> Profile</a></li>
         <li><hr class="dropdown-divider"></li>
         <li>

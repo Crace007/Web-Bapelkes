@@ -16,6 +16,7 @@ class CreateEmployeesTable extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->foreignId('nip')->unique();
+            $table->foreignId('user_id')->unique();
             $table->foreignId('pangkat_id');
             $table->foreignId('jabatan_id');
             $table->date('tanggal_pangkat');

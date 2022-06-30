@@ -8,12 +8,12 @@
                <div class="row">
                    <div class="col-md-3">
                         <div class="card bg-warning d-flex justify-content-center" style="height: 150px">
-                            <h3 class="text-center">VISI</h3>
+                            <h1 class="text-center text-white">VISI</h1>
                         </div>
                    </div>
                    <div class="col-md-7 p-2">
                         <ul>
-                            <li style="font-family: 'Times New Roman', Times, serif;">
+                            <li>
                                 <strong>
                                     Terwujudnya Indonesia Maju yang Berdaulat, Mandiri, dan Berkepribadian, Berlandaskan Gotong Royong
                                 </strong>
@@ -32,11 +32,11 @@
                <div class="row">
                    <div class="col-md-3">
                         <div class="card bg-success d-flex justify-content-center" style="height: 150px">
-                            <h3 class="text-center">MISI</h3>
+                            <h1 class="text-center text-white">MISI</h1>
                         </div>
                    </div>
                    <div class="col-md-7 p-2">
-                    <ol style="font-family: 'Times New Roman', Times, serif;">
+                    <ol>
                         <strong>
                            <li>
                                 Memperkuat upaya kesehatan yang bermutu dan menjangkau seluruh penduduk  Indonesia

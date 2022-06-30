@@ -31,4 +31,11 @@ class RegisterController extends Controller
         // $request->session()->flash('success', 'Registration successfull please login');
         return redirect('/login')->with('success', 'Register success please login');
     }
+
+    public function registerperserta()
+    {
+        return view('guest.register.peserta', [
+            'title' => 'Register Peserta'
+        ]);
+    }
 }

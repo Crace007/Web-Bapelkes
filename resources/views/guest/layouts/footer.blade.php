@@ -4,12 +4,12 @@
       <!-- Section: Social media -->
       <section class="mb-4 text-end">
         <!-- Instagram -->
-        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+        <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/bapelkesmataramkemenkesri/" target="_blank" role="button">
           <i class="bi bi-instagram"></i>
         </a>
 
         <!-- Facebook -->
-        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+        <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/bapelkes.mataram/" target="_blank" role="button">
           <i class="bi bi-facebook"></i>
         </a>
 
@@ -19,7 +19,7 @@
         </a>
 
         <!-- Youtube -->
-        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+        <a class="btn btn-outline-light btn-floating m-1" href="https://www.youtube.com/channel/UC3gmRat7c2x-WvMlRPeD2Ww/featured" target="_blank" role="button">
           <i class="bi bi-youtube"></i>
         </a>
 

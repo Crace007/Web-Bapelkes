@@ -25,7 +25,7 @@
             <th scope="col" rowspan="2">Nama Pelatihan</th>
             <th scope="col" rowspan="2">Jumlah Peserta</th>
             <th scope="col" colspan="2">Tanggal Pelaksana</th>
-            <th scope="col" colspan="2">Lama</th>
+            <th scope="col" colspan="2">Durasi</th>
             <th scope="col" rowspan="2">Metode</th>
             <th scope="col" rowspan="2">Tempat Penyelenggara</th>
             <th scope="col" rowspan="2">ket</th>
@@ -63,5 +63,5 @@
         </tbody>
       </table>
   </div>
-  </div>
+</div>
 @endsection

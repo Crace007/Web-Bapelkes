@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Employee;
 use App\Models\Filecategory;
+use App\Models\Fileuser;
 use App\Models\User;
 use App\Models\Imagepost;
 use App\Models\Post;
+use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -27,7 +30,10 @@ class UserController extends Controller
             'imagepost' => Imagepost::all(),
             'posts'     => Post::latest()->where('user_id', auth()->user()->id)->get(),
             'pegawai'   => Employee::where('id', auth()->user()->employee_id)->get()->first(),
+            'personal'  => User::where('id', auth()->user()->id)->get(),
             'user'      => User::all(),
+            'fileuser'  => Fileuser::all(),
+            'filepersonal'  => Fileuser::where('user_id', auth()->user()->id)->get(),
             'categories' => Filecategory::all(),
         ]);
     }
@@ -88,7 +94,7 @@ class UserController extends Controller
     {
         $data = $request->validate([
             'name'              => 'required|max:60',
-            'tempat_lahir'      => 'required',
+            'tempat_lahir'      => 'required|max:25',
             'tanggal_lahir'     => 'required',
             'jenis_kelamin'     => 'required',
             'status_hubungan'   => 'required',
@@ -131,5 +137,64 @@ class UserController extends Controller
         $data['photo_profile'] = null;
         User::where('id', $users)->update($data);
         return view('admin.profile.index');
+    }
+
+    public function setting()
+    {
+        return view('admin.profile.setting');
+    }
+
+    public function updateUsername(Request $request)
+    {
+        $user = User::where('slug', $request->slug_old)->get()->first();
+        // dd($user);
+        $data = $request->validate([
+            'username'          => 'required|max:25|unique:users',
+            'slug'              => 'required|unique:users',
+        ]);
+
+        if (Hash::check($request->password1, $user->password)) {
+            User::where('slug', $user->slug)
+                ->update($data);
+            return redirect('admin/users/setting')->with('success', 'Username telah di perbaharui');
+        } else {
+            return redirect('admin/users/setting')->with('destroy', 'Password yang di input Salah');
+        }
+    }
+
+    public function updateEmail(Request $request)
+    {
+        $user = User::where('slug', $request->slug_old2)->get()->first();
+        // dd($user);
+        $data = $request->validate([
+            'email'             => 'required|email:dns|unique:users',
+        ]);
+
+        if (Hash::check($request->password2, $user->password)) {
+            User::where('slug', $user->slug)
+                ->update($data);
+            return redirect('admin/users/setting')->with('success', 'Email telah di perbaharui');
+        } else {
+            return redirect('admin/users/setting')->with('destroy', 'Password yang di input Salah');
+        }
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $user = User::where('slug', $request->slug_old3)->get()->first();
+        // dd($user);
+        $data = $request->validate([
+            'password' => 'required|min:5|max:255'
+        ]);
+
+        $data['password'] = Hash::make($data['password']);
+
+        if (Hash::check($request->password3, $user->password)) {
+            User::where('slug', $user->slug)
+                ->update($data);
+            return redirect('admin/users/setting')->with('success', 'Email telah di perbaharui');
+        } else {
+            return redirect('admin/users/setting')->with('destroy', 'Password yang di input Salah');
+        }
     }
 }

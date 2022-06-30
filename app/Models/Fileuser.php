@@ -11,18 +11,13 @@ class Fileuser extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
-
     public function user()
     {
         return $this->hasMany(User::class);
     }
 
-    public function category()
+    public function filecategory()
     {
-        return $this->hasOne(Filecategory::class);
+        return $this->belongsTo(Filecategory::class);
     }
 }

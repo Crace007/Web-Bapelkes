@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use App\Models\Trainingschedule;
 use App\Models\Employeel;
+use App\Models\Materipelatihan;
+use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 
 class TrainingScheduleController extends Controller
@@ -89,7 +91,14 @@ class TrainingScheduleController extends Controller
      */
     public function show(Trainingschedule $trainingschedule)
     {
-        //
+        // $materi = Materipelatihan::where('pelatihan_id', $trainingschedule->id)->get();
+        // dd($materi);
+        return view('admin.jadwal_pelatihan.show', [
+            'pegawai' => Employee::all(),
+            'materi' => Materipelatihan::where('pelatihan_id', $trainingschedule->id)->get(),
+            'data'  => $trainingschedule,
+            'datapelatihan'  => $trainingschedule
+        ]);
     }
 
     /**

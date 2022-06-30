@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Fileuser;
+use App\Models\Filecategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
-class FileUserController extends Controller
+class FileuserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +26,9 @@ class FileUserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.profile.createfile')->with([
+            'categories' => Filecategory::all(),
+        ]);
     }
 
     /**
@@ -36,18 +40,17 @@ class FileUserController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name'          => 'required',
-            'slug'          => 'required|unique:fileusers,slug',
-            'category_id'   => 'required',
-            'user_id'       => 'required',
-            'file_user'     => 'max:10240|mimes:doc,docx,pdf,xls,xlsx,ppt,pptx',
+            'nama'              => 'required',
+            'user_id'           => 'required',
+            'filecategory_id'   => 'required',
+            'nama_file'         => 'max:10240|mimes:doc,docx,pdf,xls,xlsx,ppt,pptx',
         ]);
 
-        if ($request->file('file_user')) {
-            $data['file_user'] = $request->file('file_user')->store('file_user');
+        if ($request->file('nama_file')) {
+            $data['nama_file'] = $request->file('nama_file')->store('nama_file');
         };
         Fileuser::create($data);
-        return response("data berhasil diubah");
+        return response("data berhasil ditambah");
     }
 
     /**
@@ -56,9 +59,13 @@ class FileUserController extends Controller
      * @param  \App\Models\Fileuser  $fileuser
      * @return \Illuminate\Http\Response
      */
-    public function show(Fileuser $fileuser)
+    public function show($id)
     {
-        //
+        $data = Fileuser::FindOrFail($id);
+        return view('admin.profile.editfile')->with([
+            'data' => $data,
+            'categories' => Filecategory::all(),
+        ]);
     }
 
     /**
@@ -67,9 +74,8 @@ class FileUserController extends Controller
      * @param  \App\Models\Fileuser  $fileuser
      * @return \Illuminate\Http\Response
      */
-    public function edit(Fileuser $fileuser)
+    public function edit(Fileuser $fileuser, Request $request)
     {
-        //
     }
 
     /**
@@ -81,7 +87,19 @@ class FileUserController extends Controller
      */
     public function update(Request $request, Fileuser $fileuser)
     {
-        //
+        $data = $request->validate([
+            'nama'              => 'required',
+            'user_id'           => 'required',
+            'filecategory_id'   => 'required',
+            'nama_file'         => 'max:10240|mimes:doc,docx,pdf,xls,xlsx,ppt,pptx',
+        ]);
+
+        if ($request->file('nama_file')) {
+            Storage::delete($request->file_user_old);
+            $data['nama_file'] = $request->file('nama_file')->store('nama_file');
+        };
+        Fileuser::where('id', $fileuser->id)->update($data);
+        return response("data berhasil diubah");
     }
 
     /**
@@ -92,6 +110,8 @@ class FileUserController extends Controller
      */
     public function destroy(Fileuser $fileuser)
     {
-        //
+        Storage::delete($fileuser->nama_file);
+        Fileuser::destroy($fileuser->id);
+        return redirect()->back()->withInput();
     }
 }

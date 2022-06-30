@@ -55,7 +55,6 @@ class PostController extends Controller
             'file_name.*'   => 'mimes:jpg,jpeg,png,bmp',
             'body'          => 'required'
         ]);
-        // dd($request->title);
 
         $data = [
             'title'         => $request->title,

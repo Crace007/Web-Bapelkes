@@ -27,20 +27,7 @@ class DatabaseSeeder extends Seeder
         // User::factory(4)->create();
         // Post::factory(20)->create();
 
-        User::create([
-            'name'              => 'Lalu M. Fatwa Aulia',
-            'username'          => 'crace007',
-            'slug'              => 'crace007',
-            'email'             => 'fatwa.tkj1@gmail.com',
-            'tempat_lahir'      => 'Pejeruk',
-            'tanggal_lahir'     => '1999-06-12',
-            'jenis_kelamin'      => 'laki-laki',
-            'umur'              => '23',
-            'status_pekerjaan'  => 'THL',
-            'status_hubungan'   => 'lanjang',
-            'password'          => bcrypt('123akusayang'),
-        ]);
-
+        //user
         User::create([
             'name'              => 'Admin',
             'username'          => 'admin',
@@ -55,6 +42,316 @@ class DatabaseSeeder extends Seeder
             'password'          => bcrypt('admin'),
         ]);
 
+        User::create([
+            'name'              => 'Khaerul Anwar,SKM.M.Kes',
+            'username'          => 'Khaerul',
+            'slug'              => 'khaerul',
+            'email'             => 'khaerulibnuanwar@gmail.com',
+            'tempat_lahir'      => 'Lombok Utara',
+            'tanggal_lahir'     => '1964-12-31',
+            'jenis_kelamin'     => 'laki-laki',
+            'umur'              => '57',
+            'status_pekerjaan'  => 'ASN',
+            'status_hubungan'   => 'Menikah',
+            'password'          => bcrypt('password'),
+        ]);
+
+        User::create([
+            'name'              => 'Mustika  Hidayati,SKM.,M.Kes',
+            'username'          => 'Mustika',
+            'slug'              => 'mustika',
+            'email'             => 'mustika_12@yahoo.co.id',
+            'tempat_lahir'      => 'Jakarta',
+            'tanggal_lahir'     => '1963-04-06',
+            'jenis_kelamin'     => 'perempuan',
+            'umur'              => '58',
+            'status_pekerjaan'  => 'ASN',
+            'status_hubungan'   => 'Menikah',
+            'password'          => bcrypt('password'),
+        ]);
+
+        User::create([
+            'name'              => 'dr. IGAR Astarini, M.Kes',
+            'username'          => 'Astarini',
+            'slug'              => 'astarini',
+            'email'             => 'igar_dr@yahoo.co.id',
+            'tempat_lahir'      => 'Penebel',
+            'tanggal_lahir'     => '1966-06-22',
+            'jenis_kelamin'     => 'perempuani',
+            'umur'              => '55',
+            'status_pekerjaan'  => 'ASN',
+            'status_hubungan'   => 'Menikah',
+            'password'          => bcrypt('password'),
+        ]);
+
+        User::create([
+            'name'              => 'Anak Agung Istri Agung Trisnawati, S.Si.,M.Pd',
+            'username'          => 'Agung',
+            'slug'              => 'agung',
+            'email'             => 'agungtrisna2373@gmail.com',
+            'tempat_lahir'      => 'Gianyar',
+            'tanggal_lahir'     => '1973-04-23',
+            'jenis_kelamin'     => 'perempuan',
+            'umur'              => '48',
+            'status_pekerjaan'  => 'ASN',
+            'status_hubungan'   => 'Menikah',
+            'password'          => bcrypt('password'),
+        ]);
+
+        User::create([
+            'name'              => 'H. Mulyadi Fadjar, S.Kp.M.Kes',
+            'username'          => 'Fadjar',
+            'slug'              => 'fadjar',
+            'email'             => 'mulyadifadjar930@gmail.com',
+            'tempat_lahir'      => 'Sumenep',
+            'tanggal_lahir'     => '1970-07-26',
+            'jenis_kelamin'     => 'laki-laki',
+            'umur'              => '50',
+            'status_pekerjaan'  => 'ASN',
+            'status_hubungan'   => 'Menikah',
+            'password'          => bcrypt('password'),
+        ]);
+
+        User::create([
+            'name'              => 'Ali Wardana.SKM.M,Si',
+            'username'          => 'Ali',
+            'slug'              => 'ali',
+            'email'             => 'ali.wardanaa01@gmail.com',
+            'tempat_lahir'      => 'Surabaya',
+            'tanggal_lahir'     => '1973-11-01',
+            'jenis_kelamin'     => 'laki-laki',
+            'umur'              => '48',
+            'status_pekerjaan'  => 'ASN',
+            'status_hubungan'   => 'Menikah',
+            'password'          => bcrypt('password'),
+        ]);
+
+        User::create([
+            'name'              => 'Lalu Ahmad Yani,SKM., MPH.',
+            'username'          => 'Yani',
+            'slug'              => 'yani',
+            'email'             => 'laluahmadyani4@gmail.com',
+            'tempat_lahir'      => 'Lombok Tengah',
+            'tanggal_lahir'     => '1967-03-14',
+            'jenis_kelamin'     => 'laki-laki',
+            'umur'              => '54',
+            'status_pekerjaan'  => 'ASN',
+            'status_hubungan'   => 'Menikah',
+            'password'          => bcrypt('password'),
+        ]);
+
+        User::create([
+            'name'              => 'Nani Fitriani, S.Pd,MPH',
+            'username'          => 'Nani',
+            'slug'              => 'nani',
+            'email'             => 'finan.mataram@gmail.com',
+            'tempat_lahir'      => 'Mataram',
+            'tanggal_lahir'     => '1971-11-24',
+            'jenis_kelamin'     => 'perempuan',
+            'umur'              => '49',
+            'status_pekerjaan'  => 'ASN',
+            'status_hubungan'   => 'Menikah',
+            'password'          => bcrypt('password'),
+        ]);
+
+        User::create([
+            'name'              => 'L. Muh. Harmain Siswanto,S.Kep.Ns.M.Kep',
+            'username'          => 'Siswanto',
+            'slug'              => 'siswanto',
+            'email'             => 'lalusiswantoui@gmail.com',
+            'tempat_lahir'      => 'Lombok Timur',
+            'tanggal_lahir'     => '1983-05-09',
+            'jenis_kelamin'     => 'laki-laki',
+            'umur'              => '38',
+            'status_pekerjaan'  => 'ASN',
+            'status_hubungan'   => 'Menikah',
+            'password'          => bcrypt('password'),
+        ]);
+
+        User::create([
+            'name'              => 'Zukhairiyati S.Sos',
+            'username'          => 'Zukhairiyati',
+            'slug'              => 'zukhairiyati',
+            'email'             => 'hj.zukhairiyati1966@gmail.com',
+            'tempat_lahir'      => 'Lombok Tengah',
+            'tanggal_lahir'     => '1966-12-31',
+            'jenis_kelamin'     => 'laki-laki',
+            'umur'              => '57',
+            'status_pekerjaan'  => 'ASN',
+            'status_hubungan'   => 'Menikah',
+            'password'          => bcrypt('password'),
+        ]);
+
+        User::create([
+            'name'              => 'Mukhtardi,S.Kep.,Ns.,M.P.H',
+            'username'          => 'Mukhtardi',
+            'slug'              => 'mukhtardi',
+            'email'             => 'arkhanmyson@gmail.com',
+            'tempat_lahir'      => 'Lombok Barat',
+            'tanggal_lahir'     => '1983-01-13',
+            'jenis_kelamin'     => 'laki-laki',
+            'umur'              => '38',
+            'status_pekerjaan'  => 'ASN',
+            'status_hubungan'   => 'Menikah',
+            'password'          => bcrypt('password'),
+        ]);
+
+        User::create([
+            'name'              => 'Wahida Nurusshobah, SKM.,M.Kes',
+            'username'          => 'Wahida',
+            'slug'              => 'wahida',
+            'email'             => 'wahida.nurusshobah@gmail.com',
+            'tempat_lahir'      => 'Lombok Timur',
+            'tanggal_lahir'     => '1983-11-20',
+            'jenis_kelamin'     => 'perempuan',
+            'umur'              => '38',
+            'status_pekerjaan'  => 'ASN',
+            'status_hubungan'   => 'Menikah',
+            'password'          => bcrypt('password'),
+        ]);
+
+        User::create([
+            'name'              => 'Bq.Citra Lestari,S.ST.M.Keb',
+            'username'          => 'Citra',
+            'slug'              => 'citra',
+            'email'             => 'bq.citra@gmail.com',
+            'tempat_lahir'      => 'Mataram',
+            'tanggal_lahir'     => '1980-02-18',
+            'jenis_kelamin'     => 'perempuan',
+            'umur'              => '40',
+            'status_pekerjaan'  => 'ASN',
+            'status_hubungan'   => 'Menikah',
+            'password'          => bcrypt('password'),
+        ]);
+
+        User::create([
+            'name'              => 'Arif rahman,SKM.MPH',
+            'username'          => 'Arif',
+            'slug'              => 'arif',
+            'email'             => 'rifombojooke@gmail.com',
+            'tempat_lahir'      => 'Rabangodu',
+            'tanggal_lahir'     => '1978-08-18',
+            'jenis_kelamin'     => 'laki-laki',
+            'umur'              => '42',
+            'status_pekerjaan'  => 'ASN',
+            'status_hubungan'   => 'Menikah',
+            'password'          => bcrypt('password'),
+        ]);
+
+        User::create([
+            'name'              => 'Ari Kusmiantini,S.Kep.Ners',
+            'username'          => 'Ari',
+            'slug'              => 'ari',
+            'email'             => 'kusmiantini@gmail.com',
+            'tempat_lahir'      => 'Mataram',
+            'tanggal_lahir'     => '1983-09-27',
+            'jenis_kelamin'     => 'perempuan',
+            'umur'              => '38',
+            'status_pekerjaan'  => 'ASN',
+            'status_hubungan'   => 'Menikah',
+            'password'          => bcrypt('password'),
+        ]);
+
+        User::create([
+            'name'              => 'Dian Fajriani,S.Kep.Ns',
+            'username'          => 'Dian',
+            'slug'              => 'dian',
+            'email'             => 'dianfajriani16@gmail.com',
+            'tempat_lahir'      => 'Lombok Tengah',
+            'tanggal_lahir'     => '1984-05-06',
+            'jenis_kelamin'     => 'perempuan',
+            'umur'              => '37',
+            'status_pekerjaan'  => 'ASN',
+            'status_hubungan'   => 'Menikah',
+            'password'          => bcrypt('password'),
+        ]);
+
+        User::create([
+            'name'              => 'Ahmad Idrus',
+            'username'          => 'Idrus',
+            'slug'              => 'idrus',
+            'email'             => 'idrusahmad1967@gmail.com',
+            'tempat_lahir'      => 'Ampenan',
+            'tanggal_lahir'     => '1967-10-13',
+            'jenis_kelamin'     => 'laki-laki',
+            'umur'              => '54',
+            'status_pekerjaan'  => 'ASN',
+            'status_hubungan'   => 'Menikah',
+            'password'          => bcrypt('password'),
+        ]);
+
+        User::create([
+            'name'              => 'Hery Pranoto,SKM',
+            'username'          => 'Hery',
+            'slug'              => 'hery',
+            'email'             => 'pranotohery@yahoo.com',
+            'tempat_lahir'      => 'Jawa Tengah',
+            'tanggal_lahir'     => '1978-11-21',
+            'jenis_kelamin'     => 'laki-laki',
+            'umur'              => '42',
+            'status_pekerjaan'  => 'ASN',
+            'status_hubungan'   => 'Menikah',
+            'password'          => bcrypt('password'),
+        ]);
+
+        User::create([
+            'name'              => 'Siti Nurlaila Ahyani,SE',
+            'username'          => 'Nurlaila',
+            'slug'              => 'nurlaila',
+            'email'             => 'el.ahyani@yahoo.com',
+            'tempat_lahir'      => 'Mataram',
+            'tanggal_lahir'     => '1977-08-03',
+            'jenis_kelamin'     => 'perempuan',
+            'umur'              => '44',
+            'status_pekerjaan'  => 'ASN',
+            'status_hubungan'   => 'Menikah',
+            'password'          => bcrypt('password'),
+        ]);
+
+        User::create([
+            'name'              => 'Mawardi',
+            'username'          => 'Mawardi',
+            'slug'              => 'mawardi',
+            'email'             => 'mawardibapelkes16@gmail.com',
+            'tempat_lahir'      => 'Lombok Timur',
+            'tanggal_lahir'     => '1970-12-31',
+            'jenis_kelamin'     => 'laki-laki',
+            'umur'              => '50',
+            'status_pekerjaan'  => 'ASN',
+            'status_hubungan'   => 'Menikah',
+            'password'          => bcrypt('password'),
+        ]);
+
+        User::create([
+            'name'              => 'Abdurrahman',
+            'username'          => 'Abdurrahman',
+            'slug'              => 'abdurrahman',
+            'email'             => 'abdurrahmanjengguar@gmail.com',
+            'tempat_lahir'      => 'Lombok Tengah',
+            'tanggal_lahir'     => '1977-12-31',
+            'jenis_kelamin'     => 'laki-laki',
+            'umur'              => '50',
+            'status_pekerjaan'  => 'ASN',
+            'status_hubungan'   => 'Menikah',
+            'password'          => bcrypt('password'),
+        ]);
+
+        User::create([
+            'name'              => 'Nuridin',
+            'username'          => 'Nuridin',
+            'slug'              => 'nuridin',
+            'email'             => 'nuridinidin424@gmail.com',
+            'tempat_lahir'      => 'Mataram',
+            'tanggal_lahir'     => '1976-10-26',
+            'jenis_kelamin'     => 'laki-laki',
+            'umur'              => '45',
+            'status_pekerjaan'  => 'ASN',
+            'status_hubungan'   => 'Menikah',
+            'password'          => bcrypt('password'),
+        ]);
+
+
+        //filecategory
         Filecategory::create([
             'name'  => 'Sertifikat',
             'slug'  => 'sertifikat',

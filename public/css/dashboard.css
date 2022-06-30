@@ -149,3 +149,7 @@ select > option:hover, select option:checked
 .btn-toggle-colaps[aria-expanded="true"]::before {
   transform: rotate(90deg);
 }
+
+#clock{
+  position: relative;
+}

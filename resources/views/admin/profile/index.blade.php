@@ -3,11 +3,11 @@
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-1">
   <h1 class="h2">PROFILE</h1>
-  <span id="output"></span>
-  <form class="d-flex">
+  <span id="output" class="text-white" style="background-color: crimson"></span>
+  {{-- <form class="d-flex">
     <input class="form-control me-2" type="search" placeholder="Search Postingan" aria-label="Search">
     <button class="btn btn-outline-dark" type="submit">Search</button>
-  </form>
+  </form> --}}
 </div>
 <div class="row">
   <div class="col-md-12">
@@ -27,7 +27,7 @@
               <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="dropdown" aria-expanded="false"><span data-feather="menu"></span></button>
               <ul class="dropdown-menu dropdown-menu-end">
                 <li><button type="button" class="dropdown-item btn btn-primary btn-sm mb-1 border-0" onclick="ResetModal()" data-bs-toggle="modal" data-bs-target="#fotoprofileModal"><span data-feather="image"></span> Change Photo Profile</button></li>
-                <li><a href="#" class="dropdown-item" type="button"><span data-feather="settings"></span> Settings</a></li>
+                <li><a href="/admin/users/setting" class="dropdown-item" type="button"><span data-feather="settings"></span> Settings</a></li>
               </ul>
             </div>
           </div>
@@ -66,6 +66,7 @@
               </div>
             </div>
           </div>
+
         </div>
         <h3 class="text-center mt-2">{{auth()->user()->name}}</h3>
         @if (isset(auth()->user()->about))
@@ -98,7 +99,8 @@
                   <td>TTL</td>
                   <td>:</td>
                   {{-- <td>{{auth()->user()->birthplace}}, {!! htmlspecialchars_decode(date('j<\s\up>S</\s\up> F Y', strtotime(auth()->user()->birthdate))) !!}</td> --}}
-                  <td>{{auth()->user()->tempat_lahir}}, {{ date('d M Y', strtotime(auth()->user()->tanggal_lahir)) }}</td>
+                  <td>{{auth()->user()->tempat_lahir}}, {{ tanggal_id(auth()->user()->tanggal_lahir) }}</td>
+                  {{-- <td>{{auth()->user()->tempat_lahir}}, {{ auth()->user()->tanggal_lahir}}</td> --}}
                 </tr>
                 <tr>
                   <td>Jenis Kelamin</td>
@@ -211,48 +213,26 @@
           </div>
           <div class="col">
             <div class="d-flex flex-row-reverse">
-              <button type="button" class="btn btn-primary btn-sm mb-1 border-0" data-bs-toggle="modal" data-bs-target="#FileuploadModal" onclick="ResetModalFile()"><span data-feather="file-plus"></span> Add File</button>
+              <button type="button" class="btn btn-primary btn-sm mb-1 border-0" onclick="createFile()"><span data-feather="file-plus"></span> Add File</button>
             </div>
           </div>
         </div>
-        {{-- modal file upload --}}
-        <div class="modal fade" id="FileuploadModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        {{-- File Upload Modal  --}}
+        <div class="modal fade" id="FileProfileModal" tabindex="-1" aria-labelledby="testupdatefile" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Upload File</h5>
+                <h5 class="modal-title" id="testupdatefile">Upload File</h5>
+                </p>
+                  <span id="reporterror" class="text-white" style="background-color: crimson"></span>
+                <p>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <form id="FileModalForm">
-                <div class="modal-body">
-                  <div class="mb-3">
-                    <label for="name" class="col-form-label">Nama File:</label>
-                    <input type="text" class="form-control" id="title" name="name" required>
-                    <input type="hidden" class="form-control" id="slug" name="slug" required>
-                    <input type="hidden" class="form-control" id="user_id" name="user_id" value="{{ auth()->user()->id }}" required>
-                  </div>
-                  <div class="mb-3">
-                    <label for="Category" class="form-label">Kategori File:</label>
-                    <select class="form-select" name="category_id">
-                      <option value="" disabled selected>-- SELECT ONE --</option>
-                      @foreach ($categories as $item)
-                        <option value="{{$item->slug}}">{{$item->name}}</option>  
-                      @endforeach
-                    </select>
-                  </div>
-                  <div class="mb-3">
-                    <label for="file_user" class="col-form-label">Pilih File:</label>
-                    <input type="file" class="form-control" id="file_user" name="file_user">
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary" id="btn_UploadFile" onclick="uploadFile()">Upload</button>
-                </div>
-              </form>
+              <div id="page"></div>
             </div>
           </div>
         </div>
+
         <div class="col">
           <div class="card">
             <div class="card-body">
@@ -261,44 +241,78 @@
               </a>
               <div class="collapse" id="sertif-collapse">
                 <ul>
-                  <li>
-                    <a class="d-flex justify-content-between btn btn-light btn-sm" href="">
-                      <div>tes data</div>
-                      <span data-feather="download"></span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="d-flex justify-content-between btn btn-light btn-sm" href="">
-                      <div>tes data</div>
-                      <span data-feather="download"></span>
-                    </a>
-                  </li>
-                </ul>
+                  @if (!$filepersonal == null)
+                    @foreach ($filepersonal as $item)
+                      @if ($item->filecategory->name === 'Sertifikat')
+                      <li>
+                        <div class="btn btn-light btn-sm d-flex">
+                          <div class="me-auto">
+                            <a style="text-transform: uppercase" class="text-decoration-none" href="{{asset('storage/'. $item->nama_file)}}" target="_blank">
+                            {{$item->nama}}
+                            </a>
+                          </div>
+                          <div>   
+                            <button class="btn btn-success btn-sm" onclick="updateFile({{ $item->id }})"><span data-feather="edit"></span></button>
+                          </div>
+                          <div>
+                            <form action="admin/fileusers/{{$item->id}}" method="POST" class="d-inline">
+                              @method('delete')
+                              @csrf
+                              <button class="btn btn-danger btn-sm" onclick="return confirm('Are You Sure ?')"><span data-feather="trash"></span></button>
+                            </form>
+                          </div>
+                          <div>
+                            <a class="btn btn-primary btn-sm" href="/admin/downloads/{{$item->id}}"><span data-feather="download"></span></a>
+                          </div>
+                        </div>
+                      </li>
+                      @endif
+                    @endforeach
+                  @endif
+                  </ul>
               </div>
               <a class="btn-toggle-colaps d-flex ustify-content-between btn collapsed" data-bs-toggle="collapse" data-bs-target="#sk-collapse" aria-expanded="false">
                 SK
               </a>
               <div class="collapse" id="sk-collapse">
+                @if (!$filepersonal == null)
                 <ul>
-                  <li>
-                    <a class="d-flex justify-content-between btn btn-light btn-sm" href="">
-                      <div>tes data</div>
-                      <span data-feather="download"></span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="d-flex justify-content-between btn btn-light btn-sm" href="">
-                      <div>tes data</div>
-                      <span data-feather="download"></span>
-                    </a>
-                  </li>
-                </ul>
+                    @foreach ($filepersonal as $item)
+                      @if ($item->filecategory->name === 'SK')
+                      <li>
+                        <div class="btn btn-light btn-sm d-flex">
+                          <div class="me-auto">
+                            <a style="text-transform: uppercase" class="text-decoration-none" href="{{asset('storage/'. $item->nama_file)}}" target="_blank">
+                            {{$item->nama}}
+                            </a>
+                          </div>
+                          <div>   
+                            <button class="btn btn-success btn-sm" onclick="updateFile({{ $item->id }})"><span data-feather="edit"></span></button>
+                          </div>
+                          <div>
+                            <form action="/admin/fileusers/{{$item->id}}" method="POST" class="d-inline">
+                              @method('delete')
+                              @csrf
+                              <button class="btn btn-danger btn-sm" onclick="return confirm('Are You Sure ?')"><span data-feather="trash"></span></button>
+                            </form>
+                          </div>
+                          <div>
+                            <a class="btn btn-primary btn-sm" href="/admin/downloads/{{$item->id}}"><span data-feather="download"></span></a>
+                          </div>
+                        </div>
+                      </li>
+                      @endif
+                    @endforeach
+                  </ul>
+                @else
+                  <p class="text-center">No data</p> 
+                @endif
               </div>
               <a class="btn-toggle-colaps d-flex ustify-content-between btn collapsed" data-bs-toggle="collapse" data-bs-target="#dataLain-collapse" aria-expanded="false">
                 DATA LAINNYA
               </a>
               <div class="collapse" id="dataLain-collapse">
-                <<ul>
+                <ul>
                   <li>
                     <a class="d-flex justify-content-between btn btn-light btn-sm" href="">
                       <div>tes data</div>

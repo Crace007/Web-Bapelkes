@@ -6,6 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Lalu M Fatwa Aulia">
     <meta name="generator" content="Hugo 0.88.1">
+    <meta name="_token" content="{{ csrf_token() }}"/>
     <title>Sidebars · Bootstrap v5.1</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sidebars/">
@@ -103,7 +104,6 @@
 
     {{-- NAVBAR --}}
     @include('admin.layouts.header')
-
     
     <div class="container-fluid">
       {{-- SIDEBAR --}}
@@ -119,12 +119,64 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script src="/js/sidebars.js"></script>
     <script src="/js/dashboard.js"></script>
+    
     <script type="text/javascript">
+
+      function changeUsername(){
+        document.getElementById('changeUsername').style.display = 'block';
+        document.getElementById('changeEmail').style.display = 'none';
+        document.getElementById('changePassword').style.display = 'none';
+      }
+
+      function changeEmail(){
+        document.getElementById('changeUsername').style.display = 'none';
+        document.getElementById('changeEmail').style.display = 'block';
+        document.getElementById('changePassword').style.display = 'none';
+      }
+
+      function changePassword(){
+        document.getElementById('changeUsername').style.display = 'none';
+        document.getElementById('changeEmail').style.display = 'none';
+        document.getElementById('changePassword').style.display = 'block';
+      }
+
+      function cancelMateri(){
+        document.getElementById('formmateri').style.display = 'none';
+        document.getElementById('btn_tambahmateri').style.display = 'block';
+        // document.getElementById('btn_tambahmateripelatihan').onclick = 'createMateri(id)';
+      }
+
+      function createMateri(id){    
+        document.getElementById('btn_tambahmateri').style.display = 'none';    
+        document.getElementById('formmateri').style.display = 'block';    
+        $.get('/admin/materipelatihans/create?user={{ auth()->user()->id }}&pelatihan=' + id , function (data, Status) {
+        $('#formmateri').html(data);
+        })
+      }
+
+      function readMateri(id){
+        document.getElementById('readtabelmaterifirst').style.display  = 'none';
+        $.get('/admin/materipelatihans?pelatihan=' + id, function (data, Status) {
+          $('#readtabelmateri').html(data);
+        })
+      }
+
+
+      function updateMateri(id){
+        document.getElementById('btn_tambahmateri').style.display = 'none';
+        document.getElementById('formmateri').style.display = 'block';    
+        $.get('/admin/materipelatihans/' + id +'/edit', function (data, Status) {
+          $('#formmateri').html(data);
+        })
+      }
+
       const title = document.querySelector('#title');
       const slug = document.querySelector('#slug');
-  
+      
+
       if(title != null){
         title.addEventListener('change', function(){
           fetch('/admin/posts/checkSlug?title='+ title.value)
@@ -164,12 +216,12 @@
       function uploadProfile(){
         //stop submit the form, we will post it manually.
         event.preventDefault();
-
+        
         // Get form
         var form = $('#tesFormModal')[0];
         // Get Url
         var url = "{{config('app.url')}}/admin/users/uploadProfile/{{ auth()->user()->id }}";
-        
+    
         // FormData object 
         var data = new FormData(form);
 
@@ -201,26 +253,69 @@
       }
 
       function ResetModalFile(){
-        document.getElementById("FileModalForm").reset();
-      }  
+        document.getElementById("FileFormModal").reset();
+      }
+      
+      function createFile(){
+        $.get('/admin/fileusers/create', function (data, Status) {
+          $('#page').html(data);
+          $('#FileProfileModal').modal('show');
+        })
+      }
+      function updateFile(id){
+        $.get('/admin/fileusers/' + id, function (data, Status) {
+          $('#page').html(data);
+          $('#FileProfileModal').modal('show');
+        })
+      }
 
-      function uploadFile(){
+      function uploadFile(kondisi, id){
         //stop submit the form, we will post it manually.
         event.preventDefault();
+        var form, url, data, method;
+        switch(kondisi){
+          case 'create' :
+            // Get form
+            form = $('#FileFormModalCreate')[0];
+            // Get Url
+            url = "{{config('app.url')}}/admin/fileusers";
+            // method type
+            method = "POST"
+            break;
 
-        // Get form
-        var form = $('#FileFormModal')[0];
-        // Get Url
-        var url = "{{config('app.url')}}/admin/fileuser/uploadFile/";
-        
+          case 'update' :
+            // Get form
+            form = $('#FileFormModalEdit')[0];
+            // Get Url
+            url = "{{config('app.url')}}/admin/fileusers/" + id;
+            // method type
+            method = "POST"
+            break;
+
+          case 'delete' :
+            // Get form
+            form = $('#FileFormModal')[0];
+            // Get Url
+            url = "{{config('app.url')}}/admin/fileusers/";
+            // method type
+            method = "DELETE"
+            break;
+        }
+
         // FormData object 
-        var data = new FormData(form);
+        data = new FormData(form);
 
         // disabled the submit button
         $("#btn_UploadFile").addClass("disabled");
+        
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        });
 
         $.ajax({
-            type: "POST",
+            type: method,
             enctype: 'multipart/form-data',
             url: url,
             data: data,
@@ -230,19 +325,222 @@
                 $("#output").text(data);
                 console.log("SUCCESS : ", data);
                 $("#btn_UploadFile").removeClass("disabled");
-                $('#FileFormModal').modal('hide');
+                $('#FileProfileModal').modal('hide');
                 window.location.reload();
             },
             error: function (e) {
                 // $("#output").text(e.responseText);
-                $("#output").text("Upload Error");
+                $("#reporterror").text("Upload Error");
                 console.log("ERROR : ", "upload error");
+                console.log("isi data : ", e);
                 $("#btn_UploadFile").removeClass("disabled");
-                $('#FileFormModal').modal('hide');
+                $('#FileProfileModal').modal('hide');
             }
         });
       }
-  
+
+      //materi pelatihan
+      function materiPelatihan(kondisi, id, idpelatihan){
+        //stop submit the form, we will post it manually.
+        event.preventDefault();
+        var form, url, data, method;
+        
+        switch(kondisi){
+          case 'create' :
+            // Get form
+            form = $('#FormMateriPelatihan')[0];
+            // Get Url
+            url = "{{config('app.url')}}/admin/materipelatihans";
+            // method type
+            method = "POST"
+            break;
+          case 'update' :
+            // Get form
+            form = $('#FormMateriPelatihan')[0];
+            // Get Url
+            url = "{{config('app.url')}}/admin/materipelatihans/" + id;
+            // method type
+            method = "POST"
+            break;
+          case 'delete' :
+            // Get form
+            form = $('#FormMateriPelatihan')[0];
+            // Get Url
+            url = "{{config('app.url')}}/admin/materipelatihans/";
+            // method type
+            method = "DELETE"
+            break;
+        }
+
+        // FormData object 
+        data = new FormData(form);
+
+        // disabled the submit button
+        $("#btn_SaveMateriPelatihan").addClass("disabled");
+        
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type: method,
+            enctype: 'multipart/form-data',
+            url: url,
+            data: data,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                $("#report").text(data);
+                console.log("SUCCESS : ", data);
+                $("#btn_SaveMateriPelatihan").removeClass("disabled");
+                readMateri(idpelatihan);
+                if (kondisi == 'create' ){
+                  document.getElementById("FormMateriPelatihan").reset();
+                }
+            },
+            error: function (e) {
+                // $("#output").text(e.responseText);
+                $("#reporterror").text("Upload Error");
+                console.log("ERROR : ", "upload error");
+                console.log("isi data : ", e);
+                $("#btn_UploadFile").removeClass("disabled");
+                $('#FileProfileModal').modal('hide');
+            }
+        });
+      }
+
+      //fasilitas sarana
+      function fasilitasSarana(kondisi, id, idsarana){
+        //stop submit the form, we will post it manually.
+        event.preventDefault();
+        var form, url, data, method;
+        
+        switch(kondisi){
+          case 'create' :
+            // Get form
+            form = $('#FormSaranaFasilitas')[0];
+            // Get Url
+            url = "{{config('app.url')}}/admin/fasilitas";
+            // method type
+            method = "POST"
+            break;
+          case 'update' :
+            // Get form
+            form = $('#FormSaranaFasilitas')[0];
+            // Get Url
+            url = "{{config('app.url')}}/admin/fasilitas/" + id;
+            // method type
+            method = "POST"
+            break;
+        }
+
+        // FormData object 
+        data = new FormData(form);
+
+        // disabled the submit button
+        $("#btn_SaveFasilitas").addClass("disabled");
+        
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type: method,
+            enctype: 'multipart/form-data',
+            url: url,
+            data: data,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                $("#report").text(data);
+                console.log("SUCCESS : ", data);
+                $("#btn_SaveFasilitas").removeClass("disabled");
+                readFasilitas(idsarana);
+                if (kondisi == 'create' ){
+                  document.getElementById("FormSaranaFasilitas").reset();
+                }
+            },
+            error: function (e) {
+                // $("#output").text(e.responseText);
+                $("#reporterror").text("Upload Error");
+                console.log("ERROR : ", "upload error");
+                console.log("isi data : ", e);
+                $("#btn_SaveFasilitas").removeClass("disabled");
+                $('#FileProfileModal').modal('hide');
+            }
+        });
+      }
+
+      //foto sarana
+      function fotoSarana(kondisi, id, idsarana){
+        //stop submit the form, we will post it manually.
+        event.preventDefault();
+        var form, url, data, method;
+        
+        switch(kondisi){
+          case 'create' :
+            // Get form
+            form = $('#FormFotosarana')[0];
+            // Get Url
+            url = "{{config('app.url')}}/admin/fotosarana";
+            // method type
+            method = "POST"
+            break;
+          case 'update' :
+            // Get form
+            form = $('#FormFotosarana')[0];
+            // Get Url
+            url = "{{config('app.url')}}/admin/fotosarana/" + id;
+            // method type
+            method = "POST"
+            break;
+        }
+
+        // FormData object 
+        data = new FormData(form);
+
+        // disabled the submit button
+        $("#btn_Savefotosarana").addClass("disabled");
+        
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type: method,
+            enctype: 'multipart/form-data',
+            url: url,
+            data: data,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                $("#report").text(data);
+                console.log("SUCCESS : ", data);
+                $("#btn_Savefotosarana").removeClass("disabled");
+                readfotosarana(idsarana);
+                if (kondisi == 'create' ){
+                  document.getElementById("FormFotosarana").reset();
+                }
+                if (kondisi == 'update'){
+                  updatefotosarana(id);
+                }
+            },
+            error: function (e) {
+                // $("#output").text(e.responseText);
+                $("#reporterror").text("Upload Error");
+                console.log("ERROR : ", "upload error");
+                console.log("isi data : ", e);
+                $("#btn_Savefotosarana").removeClass("disabled");
+                $('#FileProfileModal').modal('hide');
+            }
+        });
+      }
     </script>
   </body>
 

@@ -9,6 +9,11 @@ use App\Models\Postcategory;
 use App\Models\User;
 use App\Models\Imagepost;
 use App\Models\Employee;
+use App\Models\Trainingschedule;
+use App\Models\Mitra;
+use App\Models\Sarana;
+use App\Models\FasilitasSarana;
+use App\Models\Fotosarana;
 use Illuminate\Http\Request;
 use Symfony\Polyfill\Intl\Idn\Info;
 
@@ -38,7 +43,6 @@ class HomeController extends Controller
             'guest.home',
             [
                 'title' => 'Halaman Home',
-                'active' => 'home',
                 'baner' => Otherinfo::getInfo('baner-carousel'),
                 'kepala' => $kepala,
                 'posts' => post::latest()->filter(request(['search', 'category', 'author']))->paginate(7)->withQueryString(),
@@ -53,7 +57,6 @@ class HomeController extends Controller
             'guest.show',
             [
                 "title"      => "single post",
-                'active'     => 'home',
                 'post'       => $post,
                 'posts'      => Post::latest()->limit(6)->get(),
                 'imageposts' => Imagepost::all(),
@@ -66,7 +69,6 @@ class HomeController extends Controller
     {
         return view('guest.profile.sejarah', [
             'title' => 'Sejarah Bapelkes',
-            'active' => 'profile',
             'sejarah' => Otherinfo::getInfo('story')
         ]);
     }
@@ -87,17 +89,23 @@ class HomeController extends Controller
 
         return view('guest.profile.visimisi', [
             'title' => 'Sejarah Bapelkes',
-            'active' => 'profile',
             'visi'  => $visi,
             'misi'  => $misi
         ]);
     }
 
-    public function tentangbapelkes()
+    public function mitraKerja()
     {
-        return view('guest.profile.tentang', [
-            'title' => 'Sejarah Bapelkes',
-            'active' => 'profile'
+        return view('guest.profile.mitra', [
+            'title' => 'Mitra Kerja',
+            'mitra' => Mitra::all(),
+        ]);
+    }
+
+    public function strukturOrganisasi()
+    {
+        return view('guest.profile.struktur', [
+            'title' => 'Struktur Organisasi',
         ]);
     }
 
@@ -125,6 +133,24 @@ class HomeController extends Controller
             'title' => "All Post" . $title,
             'image' => Imagepost::all(),
             'posts' => post::latest()->filter(request(['search', 'category', 'author']))->paginate(7)->withQueryString()
+        ]);
+    }
+
+    public function pelatihan()
+    {
+        return view('guest.pelatihan.index', [
+            'title' => 'Data Pelatihan',
+            'data' => Trainingschedule::all()
+        ]);
+    }
+
+    public function sarana()
+    {
+        return view('guest.pelayanan.sarana', [
+            'title' => 'Sarana Pelayanan',
+            'sarana'    => Sarana::all(),
+            'fasilitas' => FasilitasSarana::all(),
+            'foto'      => Fotosarana::all(),
         ]);
     }
 }

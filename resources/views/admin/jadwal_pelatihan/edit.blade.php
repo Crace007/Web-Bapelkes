@@ -3,7 +3,7 @@
 
 <div class="pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2 mb-2">Edit Jadwal Pelatihan</h1>
-    <a href="/admin/trainingschedule" class="link-secondary"><span data-feather="arrow-left"></span> Back to profile</a>
+    <a href="/admin/trainingschedule" class="link-secondary"><span data-feather="arrow-left"></span> Back to data pelatihan</a>
 </div>
 
 <div class="col-lg-8">

@@ -16,7 +16,7 @@ class CreateFileusersTable extends Migration
         Schema::create('fileusers', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('slug');
+            // $table->string('slug')->unique();
             $table->foreignId('user_id');
             $table->foreignId('filecategory_id');
             $table->string('nama_file');

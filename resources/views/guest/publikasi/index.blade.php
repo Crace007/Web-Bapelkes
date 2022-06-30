@@ -24,7 +24,7 @@
     <div class="card mb-3">
         @foreach ($image as $img)
             @if ($img->post_id === $posts[0]->id)
-                <img class="card-img-top img-fluid" style="object-fit: cover; object-position: 50% 70%; width: auto; height: 50vh;" src="{{ asset('storage/' . $img->file_name) }}" alt="{{$posts[0]->category->name}}">
+                <img class="card-img-top img-fluid" style="object-fit: cover; object-position: 50% 20%; width: auto; height: 40vh;" src="{{ asset('storage/' . $img->file_name) }}" alt="{{$posts[0]->category->name}}">
                 @break                                        
             @endif
             @if ($loop->last)

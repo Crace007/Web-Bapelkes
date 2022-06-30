@@ -141,8 +141,8 @@ article .show-post a:hover{
 }
 
 .bg-gradient-jumbotron{
-    background: rgb(123,134,232);
-    background: linear-gradient(326deg, rgba(123,134,232,1) 0%, rgba(246,140,255,1) 52%, rgba(255,222,50,1) 100%);
+    background: rgb(15, 237, 144);
+    /* background: linear-gradient(326deg, rgba(123,134,232,1) 0%, rgba(246,140,255,1) 52%, rgba(255,222,50,1) 100%); */
     color: #270942;
 }
 
@@ -153,8 +153,8 @@ article .show-post a:hover{
 }
 
 .bg-gradient-body{
-    background: rgb(210, 243, 223);
-    background: linear-gradient(135deg, rgb(211, 237, 117) 0%, rgb(116, 223, 157) 50%, rgb(245, 245, 232) 100%);
+    background: rgb(205, 243, 205);
+    /* background: linear-gradient(135deg, rgb(211, 237, 117) 0%, rgb(116, 223, 157) 50%, rgb(245, 245, 232) 100%); */
     color: #0f2852;
 }
 
@@ -163,7 +163,7 @@ article .show-post a:hover{
 }
 
 .image-card:hover{
-    background-color: rgb(225, 192, 115);
+    background-color: rgb(230, 84, 35);
 }
 
 .font-vagrounded{

@@ -3,7 +3,7 @@
 
   <div class="row justify-content-center">
       <div class="col-md-5"> 
-            <main class="form-signin">
+            <main class="form-signin mb-5">
               <h1 class="h3 mt-3 mb-5 fw-normal text-center">Please Log in</h1>
                 @if (session()->has('success'))    
                 <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
@@ -32,10 +32,16 @@
                   @enderror
                 </div>
                 <div class="form-floating mb-5">
-                  <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
+                  <input type="password" name="password" class="form-control mb-2" id="password" placeholder="Password" required>
                   <label for="floatingPassword">Password</label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="showPassword">
+                    <label class="form-check-label" for="showPassword">
+                      Show Password
+                    </label>
+                  </div>
                 </div>
-            
+                
                 {{-- <div class="checkbox mb-3">
                   <label>
                     <input type="checkbox" value="remember-me"> Remember me
@@ -45,7 +51,8 @@
                 {{-- <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p> --}}
               </form>
             </main>
-            <small class="d-block text-center mt-3 mb-5">Don't Have Account ? <a href="/register">Register Now</a></small>
+            {{-- <small class="d-block text-center mt-3 mb-5">Don't Have Account ? <a href="/register">Register Now</a></small> --}}
       </div>
   </div>
+  <script src="/js/showpassword.js"></script>
 @endsection
