@@ -14,15 +14,15 @@
     <div class="card">
       <div class="card-body">
         <div class="row">
-          <div class="col"></div>
-          <div class="col">
+          <div class="col-md"></div>
+          <div class="col-md">
             @if (isset(auth()->user()->photo_profile))
               <img src="{{asset('storage/'.auth()->user()->photo_profile)}}" class="rounded-circle img-fuild mx-auto d-block" style="object-fit: cover; object-position: 100% 0" width="150" height="150">
             @else  
               <img src="{{ asset('storage/default_image/photo-profile.png') }}" class="rounded-circle img-fuild mx-auto d-block " width="150" height="150">
             @endif
           </div>
-          <div class="col">
+          <div class="col-md">
             <div class="d-flex flex-row-reverse">
               <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="dropdown" aria-expanded="false"><span data-feather="menu"></span></button>
               <ul class="dropdown-menu dropdown-menu-end">
@@ -74,19 +74,20 @@
         @endif
       </div>
     </div>
+    
     <div class="row mt-2">
       <div class="col-md-4">
         <div class="row mb-1">
-          <div class="col">
+          <div class="col-md">
             <h5>Data Diri</h5>
           </div>
-          <div class="col">
+          <div class="col-md">
             <div class="d-flex flex-row-reverse">
               <a href="/admin/users/{{auth()->user()->slug}}/edit" class="btn btn-primary btn-sm"><span data-feather="edit-2"></span> Edit</a>
             </div>
           </div>
         </div>
-        <div class="col mb-2">
+        <div class="col-md mb-2">
           <div class="card">
             <div class="card-body">
               <table>
@@ -127,10 +128,10 @@
           </div>
         </div>
         <div class="row mb-1">
-          <div class="col">
+          <div class="col-md">
             <h5>Kepegawaian</h5>
           </div>
-          <div class="col">
+          <div class="col-md">
             <div class="d-flex flex-row-reverse">
               @if ( auth()->user()->employee_id === null)
                 <a href="/admin/employees/create" class="btn btn-primary btn-sm"><span data-feather="plus"></span> Lengkapi Data</a>  
@@ -141,7 +142,7 @@
           </div>
         </div>
         @if ( auth()->user()->status_pekerjaan === 'ASN' )
-        <div class="col mb-2">
+        <div class="col-md mb-2">
           <div class="card">
             <div class="card-body">
               @if ($pegawai === null)
@@ -189,7 +190,7 @@
           </div>
         </div>
         @else
-          <div class="col mb-2">
+          <div class="col-md mb-2">
             <div class="card">
               <div class="card-body">
                 <table>
@@ -208,10 +209,10 @@
           </div>
         @endif
         <div class="row">
-          <div class="col">
+          <div class="col-md">
             <h5>File</h5>
           </div>
-          <div class="col">
+          <div class="col-md">
             <div class="d-flex flex-row-reverse">
               <button type="button" class="btn btn-primary btn-sm mb-1 border-0" onclick="createFile()"><span data-feather="file-plus"></span> Add File</button>
             </div>
@@ -233,10 +234,10 @@
           </div>
         </div>
 
-        <div class="col">
+        <div class="col-md">
           <div class="card">
             <div class="card-body">
-              <a class="btn-toggle-colaps d-flex btn collapsed" data-bs-toggle="collapse" data-bs-target="#sertif-collapse" aria-expanded="false">
+              <a class="btn-toggle-colaps d-flex ustify-content-between btn collapsed" data-bs-toggle="collapse" data-bs-target="#sertif-collapse" aria-expanded="false">
                 SERTIFIKAT
               </a>
               <div class="collapse" id="sertif-collapse">
@@ -312,32 +313,49 @@
                 DATA LAINNYA
               </a>
               <div class="collapse" id="dataLain-collapse">
+                @if (!$filepersonal == null)
                 <ul>
-                  <li>
-                    <a class="d-flex justify-content-between btn btn-light btn-sm" href="">
-                      <div>tes data</div>
-                      <span data-feather="download"></span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="d-flex justify-content-between btn btn-light btn-sm" href="">
-                      <div>tes data</div>
-                      <span data-feather="download"></span>
-                    </a>
-                  </li>
-                </ul>
+                    @foreach ($filepersonal as $item)
+                      @if ($item->filecategory->name === 'Data Lainnya')
+                      <li>
+                        <div class="btn btn-light btn-sm d-flex">
+                          <div class="me-auto">
+                            <a style="text-transform: uppercase" class="text-decoration-none" href="{{asset('storage/'. $item->nama_file)}}" target="_blank">
+                            {{$item->nama}}
+                            </a>
+                          </div>
+                          <div>   
+                            <button class="btn btn-success btn-sm" onclick="updateFile({{ $item->id }})"><span data-feather="edit"></span></button>
+                          </div>
+                          <div>
+                            <form action="/admin/fileusers/{{$item->id}}" method="POST" class="d-inline">
+                              @method('delete')
+                              @csrf
+                              <button class="btn btn-danger btn-sm" onclick="return confirm('Are You Sure ?')"><span data-feather="trash"></span></button>
+                            </form>
+                          </div>
+                          <div>
+                            <a class="btn btn-primary btn-sm" href="/admin/downloads/{{$item->id}}"><span data-feather="download"></span></a>
+                          </div>
+                        </div>
+                      </li>
+                      @endif
+                    @endforeach
+                  </ul>
+                @else
+                  <p class="text-center">No data</p> 
+                @endif
               </div>
             </div>
           </div>
         </div>
       </div>
-      
       <div class="col-md-8">
         <div class="row mb-1">
-          <div class="col">
+          <div class="col-md">
             <h5>Postingan</h5>
           </div>
-          <div class="col">
+          <div class="col-md">
             <div class="d-flex flex-row-reverse">
               <a href="/admin/posts/create" class="btn btn-primary btn-sm"><span data-feather="plus"></span> New Post</a>
             </div>
@@ -377,8 +395,7 @@
                             <ul class="dropdown-menu dropdown-menu-end">
                               <li><a href="/admin/posts/{{$post->slug}}/edit" class="dropdown-item" type="button"><span data-feather="edit"></span> edit</a></li>
                               <li>
-                                <form action="/admin/posts/{{$post->slug}}" method="POST" class="d-inline">
-                                  @method('delete')
+                                <form action="/admin/posts/delete/{{$post->slug}}" method="POST" class="d-inline">
                                   @csrf
                                   <button class="dropdown-item" onclick="return confirm('Are You Sure ?')"><span data-feather="trash"></span> delete</button>
                                 </form>
@@ -393,6 +410,9 @@
             @else
               <p class="text-center fs-4">No Post Found</p> 
             @endif
+            <div class="mt-2 d-flex justify-content-center">
+              {{ $posts->links() }}
+          </div>
       </div>
     </div>
   </div>

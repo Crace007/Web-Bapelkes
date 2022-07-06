@@ -9,6 +9,7 @@
 <div class="col-lg-8">
     <form method="post" action="/admin/info/users" enctype="multipart/form-data">
         @csrf
+        <input type="hidden" class="form-control" id="role_id" name="role_id" value="{{$data->id}}">
         <div class="mb-3">
           <label for="name" class="form-label"><Strong>Nama</Strong></label>
           <input type="text" class="form-control @error('name') is-invalid @enderror " id="name" name="name" value="{{old('name')}}" required autofocus >
@@ -168,7 +169,7 @@
         <div class="text-end mb-4">
           <button type="submit" class="btn btn-primary"><span data-feather="plus"></span> Tambah Data</button>
         </div>
-      </form>
+    </form>
 </div>
 
 @endsection

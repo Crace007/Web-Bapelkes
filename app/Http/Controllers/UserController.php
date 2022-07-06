@@ -28,7 +28,7 @@ class UserController extends Controller
 
         return view('admin.profile.index', [
             'imagepost' => Imagepost::all(),
-            'posts'     => Post::latest()->where('user_id', auth()->user()->id)->get(),
+            'posts'     => Post::latest()->where('user_id', auth()->user()->id)->paginate(5)->withQueryString(),
             'pegawai'   => Employee::where('id', auth()->user()->employee_id)->get()->first(),
             'personal'  => User::where('id', auth()->user()->id)->get(),
             'user'      => User::all(),

@@ -56,9 +56,7 @@ class FasilitasController extends Controller
      */
     public function show(Sarana $sarana)
     {
-        return view('admin.sarpras.sarana.fasilitas.index', [
-            'data' => FasilitasSarana::where('sarana_id', $sarana->id)->get(),
-        ]);
+        //
     }
 
     /**

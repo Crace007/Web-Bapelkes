@@ -1,4 +1,4 @@
-function startTime(){
+(function startTime(){
     var today = new Date();
     var h = today.getHours();
     var m = today.getMinutes();
@@ -8,14 +8,14 @@ function startTime(){
     document.getElementById('clock').innerHTML = 
       h + ":" + m + ":" + s;
     var t = setTimeout(startTime, 500);
-}
+})();
 
 function checkTime(i){
   if(i<10){i = "0" + i}
   return i;
 }
 
-function chartPerserta(){
+(function chartPerserta(){
     var densityCanvas = document.getElementById("densityChart");
 
     Chart.defaults.global.defaultFontFamily = "Lato";
@@ -61,4 +61,4 @@ function chartPerserta(){
       data: planetData,
       options: chartOptions
     });
-}
+})();

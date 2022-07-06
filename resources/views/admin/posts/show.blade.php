@@ -4,12 +4,14 @@
 <div class="container">
     <div class="pt-3 pb-2 mb-3 border-bottom">
       <a href="/admin/posts" class="btn btn-success"><span data-feather="arrow-left"></span> Back to Post Page</a>
+    @can('admin')
       <a href="/admin/posts/{{$post->slug}}/edit" class="btn btn-primary"><span data-feather="edit"></span> Edit</a>
       <form action="/admin/posts/{{$post->slug}}" method="POST" class="d-inline">
         @method('delete')
         @csrf
         <button class="btn btn-danger" onclick="return confirm('Are You Sure ?')"><span data-feather="trash"></span> Delete</button>
       </form>
+    @endcan
     </div>
     <div class="row my-3">
         <div class="col-lg-8">

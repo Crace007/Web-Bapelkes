@@ -22,7 +22,7 @@
                                 <div class="col"></div>
                                 <div class="col text-center">
                                     @if ($data->foto_pegawai != null)
-                                        <img src="{{asset('storage/'.$data->foto_pegawai)}}"  class="rounded img-fuild mx-auto d-block "  width="auto" height="400" alt="">
+                                        <img src="{{asset('storage/'.$data->foto_pegawai)}}"  class="rounded img-fuild mx-auto d-block "  width="300" height="auto" alt="">
                                     @else
                                         <img src="{{ asset('storage/infopost_image/kepala-noimg.jpg') }}" class="rounded img-fuild mx-auto d-block " alt="Cinque Terre" width="300" height="400">
                                     @endif

@@ -35,6 +35,7 @@ class EmployeeController extends Controller
         return view('admin.sdm.asn.create', [
             'rankcategories' => Rankcategory::all(),
             'jobcategories' => Jobcategory::all(),
+            'user'  => User::all(),
         ]);
     }
 

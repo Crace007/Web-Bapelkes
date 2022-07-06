@@ -8,7 +8,7 @@
         <img class="img-fluid rounded" src="{{ asset('storage/default_image/kemenkes.png')}}" style="width: auto; height: 60px;" alt="">
       </div>
       <div class="bd-highlight">
-        <p style="color: rgba(0, 0, 0, 0)">_</p>
+        <p style="color: rgba(0, 0, 0, 0)"></p>
       </div>
       <div class="bd-highlight">
         <img class="img-fluid rounded" src="{{ asset('storage/default_image/germas.png')}}" style="width: auto; height: 60px;" alt="">
@@ -50,7 +50,7 @@
                     <a class="nav-link {{Request::is('publikasi*') ? 'active' : ''}}" href="/publikasi"><i class="bi bi-newspaper"></i> Publikasi</a>
                 </li>
                 <li class="nav-item" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
-                  <a class="nav-link {{Request::is('pelatihan*') ? 'active' : ''}}" href="/pelatihan"><i class="bi bi-book"></i> Pelatihan</a>
+                  <a class="nav-link {{Request::is('agenda*') ? 'active' : ''}}" href="/agenda"><i class="bi bi-calendar2-event"></i> Agenda</a>
                 </li>
                 <li class="nav-item dropdown" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
                   <a class="nav-link dropdown-toggle 
@@ -61,7 +61,6 @@
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <li><a class="dropdown-item {{Request::is('sarana*') ? 'active' : ''}}" href="/sarana">Sarana</a></li>
-                    <li><a class="dropdown-item {{Request::is('pengaduan*') ? 'active' : ''}}" href="/pengaduan">Pengaduan Masyarakat</a></li>
                   </ul>
               </li>
             </ul>

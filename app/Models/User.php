@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Agenda;
 use App\Models\Post;
 use App\Models\Employee;
 use App\Models\Trainingschedule;
+use App\Models\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -67,6 +69,11 @@ class User extends Authenticatable
         return $this->hasOne(Employee::class);
     }
 
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
     public function Fileuser()
     {
         return $this->belongsTo(Fileuser::class);
@@ -75,6 +82,11 @@ class User extends Authenticatable
     public function trainingschedule()
     {
         return $this->hasMany(Trainingschedule::class);
+    }
+
+    public function agenda()
+    {
+        return $this->hasMany(Agenda::class);
     }
 
     public function getCreatedAtAttribute()

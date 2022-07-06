@@ -122,23 +122,6 @@
                     <p class="card-text">Ali Wardana</p>
                 </div>
             </div>
-            {{-- @if ($kepala != null)
-                <div class="card col">
-                    <img class="card-img-top" src="{{ asset('storage/' . $kepala->image) }}" alt="Card image" width="300" height="250" style="object-fit: cover; object-position: 100% 25%">
-                    <div class="card-body col">
-                        <h4 class="card-title">{{$kepala->title}}</h4>
-                        <p class="card-text">{!! $kepala->description !!}</p>
-                    </div>
-                </div>
-            @else
-                <div class="card col">
-                    <img class="card-img-top" src="{{ asset('storage/default_image/photo-profile.png')}}" alt="Card image" >
-                    <div class="card-body col">
-                        <h4 class="card-title">data not found</h4>
-                        <p class="card-text">no data</p>
-                    </div>
-                </div>
-            @endif --}}
             <div class="list-post">
                 <a href="#" class="text-decoration-none">
                     <div class="card col mt-2" style="background-color: rgb(15, 84, 68)">

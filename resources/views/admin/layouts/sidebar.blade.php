@@ -28,9 +28,16 @@
         </li>
 
         <li class="nav-item">
-          <a href="/admin/trainingschedule" class="nav-link text-light {{Request::is('admin/trainingschedule*') ? 'active' : ''}}">
+          <a href="/admin/agenda" class="nav-link text-light {{Request::is('admin/agenda*') ? 'active' : ''}}">
             <span data-feather="calendar"></span>
-            Jadwal Pelatihan
+            Jadwal Agenda
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/admin/trainingschedule" class="nav-link text-light {{Request::is('admin/trainingschedule*') ? 'active' : ''}}">
+            <span data-feather="book"></span>
+            Pelatihan
           </a>
         </li>
 
@@ -60,6 +67,8 @@
           </div>
         </li>
       </ul>
+
+      @can('admin')
       <hr>
       {{-- Administrator --}}
       <h6 class="sidebar-heading d-flex justify-content mb-1 text-muted">
@@ -84,6 +93,7 @@
               : Request::is('admin/rankcategories*') ? 'show'
               : Request::is('admin/infocategories*') ? 'show'
               : Request::is('admin/filecategories*') ? 'show'
+              : Request::is('admin/rolecategories*') ? 'show'
               : ''
             }}" id="category-collapse">
             <ul class="fw-normal btn-toggle-nav pb-1">
@@ -92,6 +102,7 @@
               <li><a href="/admin/rankcategories" class="categoryList {{Request::is('admin/rankcategories*') ? 'active' : ''}} link-light rounded">Pangkat Category</a></li>
               <li><a href="/admin/infocategories" class="categoryList {{Request::is('admin/infocategories*') ? 'active' : ''}} link-light rounded">Info Category</a></li>
               <li><a href="/admin/filecategories" class="categoryList {{Request::is('admin/filecategories*') ? 'active' : ''}} link-light rounded">File Category</a></li>
+              <li><a href="/admin/rolecategories" class="categoryList {{Request::is('admin/rolecategories*') ? 'active' : ''}} link-light rounded">Role Category</a></li>
             </ul>
           </div>
         </li>
@@ -118,12 +129,14 @@
         </li> 
 
         <li class="nav-item">
-          <a href="/admin/role" class="nav-link text-light {{Request::is('admin/role*') ? 'active' : ''}}">
+          <a href="/admin/rules" class="nav-link text-light {{Request::is('admin/rules*') ? 'active' : ''}}">
             <span data-feather="shield"></span>
               Role User
           </a>
         </li> 
-      </ul>          
+      </ul>
+      @endcan
+      
     </div>
     <hr>
     <div class="dropdown p-1">
@@ -135,7 +148,7 @@
         @endif
         {{auth()->user()->username}}
       </a>
-      <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser">
+      <ul class="dropdown-menu dropdown-menu-light text-small shadow" aria-labelledby="dropdownUser">
         <li><a class="dropdown-item" href="/admin/posts/create" type="button"><span data-feather="plus"></span> New Post</a></li>
         <li><a class="dropdown-item" href="/admin/users/setting" type="button"><span data-feather="settings"></span> Settings</a></li>
         <li><a href="/admin/users" class="dropdown-item" type="button"><span data-feather="user"></span> Profile</a></li>
@@ -147,7 +160,6 @@
                     <span data-feather="log-out"></span> Logout 
                   </button>
               </form>
-            {{-- <a class="dropdown-item" href="#">Sign out</a> --}}
         </li>
       </ul>
     </div>

@@ -75,7 +75,7 @@
             @enderror
         </div>
         <div class="text-end">
-          <button type="submit" class="btn btn-primary">Posting <span data-feather="send"></span></button>
+          <button type="submit" class="btn btn-primary mb-3">Posting <span data-feather="send"></span></button>
         </div>
       </form>
 </div>

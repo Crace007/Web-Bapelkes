@@ -76,7 +76,7 @@ class PostController extends Controller
             }
         };
 
-        return redirect('/admin/posts')->with('success', 'New Post Has Been Added!');
+        return redirect('/admin/users');
     }
 
     /**
@@ -177,6 +177,19 @@ class PostController extends Controller
         }
         Post::destroy($post->id);
         return redirect('/admin/posts')->with('destroy', 'The Selected Post Has Been Deleted!');
+    }
+
+    public function deletepost(Post $post)
+    {
+        $tagetimg = Imagepost::all();
+        foreach ($tagetimg as $img) {
+            if ($img->user_id === $post->id) {
+                Storage::delete($img->file_name);
+                Imagepost::destroy($img->id);
+            }
+        }
+        Post::destroy($post->id);
+        return redirect('/admin/users')->with('destroy', 'The Selected Post Has Been Deleted!');
     }
 
     public function checkSlug(Request $request)

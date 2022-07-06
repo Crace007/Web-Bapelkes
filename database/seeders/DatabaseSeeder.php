@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Role;
 use App\Models\User;
 use App\Models\Infocategory;
 use App\Models\Rankcategory;
@@ -30,6 +31,7 @@ class DatabaseSeeder extends Seeder
         //user
         User::create([
             'name'              => 'Admin',
+            'role_id'           => '1',
             'username'          => 'admin',
             'slug'              => 'admin',
             'email'             => 'bot.bapelkes@gmail.com',
@@ -37,13 +39,14 @@ class DatabaseSeeder extends Seeder
             'tanggal_lahir'     => '2022-3-12',
             'jenis_kelamin'     => 'laki-laki',
             'umur'              => '1',
-            'status_pekerjaan'  => 'ASN',
+            'status_pekerjaan'  => 'Admin',
             'status_hubungan'   => 'lanjang',
             'password'          => bcrypt('admin'),
         ]);
 
         User::create([
             'name'              => 'Khaerul Anwar,SKM.M.Kes',
+            'role_id'           => '2',
             'username'          => 'Khaerul',
             'slug'              => 'khaerul',
             'email'             => 'khaerulibnuanwar@gmail.com',
@@ -58,6 +61,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name'              => 'Mustika  Hidayati,SKM.,M.Kes',
+            'role_id'           => '2',
             'username'          => 'Mustika',
             'slug'              => 'mustika',
             'email'             => 'mustika_12@yahoo.co.id',
@@ -72,6 +76,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name'              => 'dr. IGAR Astarini, M.Kes',
+            'role_id'           => '2',
             'username'          => 'Astarini',
             'slug'              => 'astarini',
             'email'             => 'igar_dr@yahoo.co.id',
@@ -86,6 +91,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name'              => 'Anak Agung Istri Agung Trisnawati, S.Si.,M.Pd',
+            'role_id'           => '2',
             'username'          => 'Agung',
             'slug'              => 'agung',
             'email'             => 'agungtrisna2373@gmail.com',
@@ -100,6 +106,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name'              => 'H. Mulyadi Fadjar, S.Kp.M.Kes',
+            'role_id'           => '2',
             'username'          => 'Fadjar',
             'slug'              => 'fadjar',
             'email'             => 'mulyadifadjar930@gmail.com',
@@ -114,6 +121,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name'              => 'Ali Wardana.SKM.M,Si',
+            'role_id'           => '2',
             'username'          => 'Ali',
             'slug'              => 'ali',
             'email'             => 'ali.wardanaa01@gmail.com',
@@ -128,6 +136,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name'              => 'Lalu Ahmad Yani,SKM., MPH.',
+            'role_id'           => '2',
             'username'          => 'Yani',
             'slug'              => 'yani',
             'email'             => 'laluahmadyani4@gmail.com',
@@ -142,6 +151,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name'              => 'Nani Fitriani, S.Pd,MPH',
+            'role_id'           => '2',
             'username'          => 'Nani',
             'slug'              => 'nani',
             'email'             => 'finan.mataram@gmail.com',
@@ -156,6 +166,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name'              => 'L. Muh. Harmain Siswanto,S.Kep.Ns.M.Kep',
+            'role_id'           => '2',
             'username'          => 'Siswanto',
             'slug'              => 'siswanto',
             'email'             => 'lalusiswantoui@gmail.com',
@@ -170,6 +181,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name'              => 'Zukhairiyati S.Sos',
+            'role_id'           => '2',
             'username'          => 'Zukhairiyati',
             'slug'              => 'zukhairiyati',
             'email'             => 'hj.zukhairiyati1966@gmail.com',
@@ -184,6 +196,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name'              => 'Mukhtardi,S.Kep.,Ns.,M.P.H',
+            'role_id'           => '2',
             'username'          => 'Mukhtardi',
             'slug'              => 'mukhtardi',
             'email'             => 'arkhanmyson@gmail.com',
@@ -198,6 +211,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name'              => 'Wahida Nurusshobah, SKM.,M.Kes',
+            'role_id'           => '2',
             'username'          => 'Wahida',
             'slug'              => 'wahida',
             'email'             => 'wahida.nurusshobah@gmail.com',
@@ -212,6 +226,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name'              => 'Bq.Citra Lestari,S.ST.M.Keb',
+            'role_id'           => '2',
             'username'          => 'Citra',
             'slug'              => 'citra',
             'email'             => 'bq.citra@gmail.com',
@@ -226,6 +241,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name'              => 'Arif rahman,SKM.MPH',
+            'role_id'           => '2',
             'username'          => 'Arif',
             'slug'              => 'arif',
             'email'             => 'rifombojooke@gmail.com',
@@ -240,6 +256,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name'              => 'Ari Kusmiantini,S.Kep.Ners',
+            'role_id'           => '2',
             'username'          => 'Ari',
             'slug'              => 'ari',
             'email'             => 'kusmiantini@gmail.com',
@@ -254,6 +271,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name'              => 'Dian Fajriani,S.Kep.Ns',
+            'role_id'           => '2',
             'username'          => 'Dian',
             'slug'              => 'dian',
             'email'             => 'dianfajriani16@gmail.com',
@@ -268,6 +286,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name'              => 'Ahmad Idrus',
+            'role_id'           => '2',
             'username'          => 'Idrus',
             'slug'              => 'idrus',
             'email'             => 'idrusahmad1967@gmail.com',
@@ -282,6 +301,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name'              => 'Hery Pranoto,SKM',
+            'role_id'           => '2',
             'username'          => 'Hery',
             'slug'              => 'hery',
             'email'             => 'pranotohery@yahoo.com',
@@ -296,6 +316,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name'              => 'Siti Nurlaila Ahyani,SE',
+            'role_id'           => '2',
             'username'          => 'Nurlaila',
             'slug'              => 'nurlaila',
             'email'             => 'el.ahyani@yahoo.com',
@@ -310,6 +331,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name'              => 'Mawardi',
+            'role_id'           => '2',
             'username'          => 'Mawardi',
             'slug'              => 'mawardi',
             'email'             => 'mawardibapelkes16@gmail.com',
@@ -324,6 +346,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name'              => 'Abdurrahman',
+            'role_id'           => '2',
             'username'          => 'Abdurrahman',
             'slug'              => 'abdurrahman',
             'email'             => 'abdurrahmanjengguar@gmail.com',
@@ -337,7 +360,23 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
+            'name'              => 'Kamarudin',
+            'role_id'           => '2',
+            'username'          => 'Kamarudin',
+            'slug'              => 'kamarudin',
+            'email'             => 'kamarudikes4t@gmail.com',
+            'tempat_lahir'      => 'Lombok Barat',
+            'tanggal_lahir'     => '1974-12-31',
+            'jenis_kelamin'     => 'laki-laki',
+            'umur'              => '46',
+            'status_pekerjaan'  => 'ASN',
+            'status_hubungan'   => 'Menikah',
+            'password'          => bcrypt('password'),
+        ]);
+
+        User::create([
             'name'              => 'Nuridin',
+            'role_id'           => '2',
             'username'          => 'Nuridin',
             'slug'              => 'nuridin',
             'email'             => 'nuridinidin424@gmail.com',
@@ -350,6 +389,15 @@ class DatabaseSeeder extends Seeder
             'password'          => bcrypt('password'),
         ]);
 
+        Role::create([
+            'nama' => 'Admin',
+        ]);
+        Role::create([
+            'nama' => 'Member',
+        ]);
+        Role::create([
+            'nama' => 'User',
+        ]);
 
         //filecategory
         Filecategory::create([
@@ -460,66 +508,47 @@ class DatabaseSeeder extends Seeder
             'slug' => 'pembina-utama-muda-iv-c'
         ]);
 
+
         //jabatan category
         Jobcategory::create([
             'nama_jabatan' => 'Kepala Bapelkes Mataram',
             'slug' => 'kepala-bapelkes-mataram'
         ]);
         Jobcategory::create([
-            'nama_jabatan' => 'Widyaiswara Ahli Madya',
-            'slug' => 'widyaiswara-ahli-madya'
+            'nama_jabatan' => 'Fungsional Widyaiswara',
+            'slug' => 'fungsional-widyaiswara'
         ]);
         Jobcategory::create([
-            'nama_jabatan' => 'Kasi Kajian Mutu Pelatihan',
-            'slug' => 'kasi-kajian-mutu-pelatihan'
+            'nama_jabatan' => 'Kepala Sub. Bagian Adum',
+            'slug' => 'kepala-sub-bagian-adum'
         ]);
         Jobcategory::create([
-            'nama_jabatan' => 'Widyaiswara Ahli Muda',
-            'slug' => 'widyaiswara-ahli-muda'
+            'nama_jabatan' => 'Perencanaan/Penyusunan Program Anggaran dan Pelaporan',
+            'slug' => 'perencanaan-penyusunan-program-anggaran-dan-pelaporan'
         ]);
         Jobcategory::create([
-            'nama_jabatan' => 'Pengelola Kepegawaian',
-            'slug' => 'pengelola-kepegawaian'
+            'nama_jabatan' => 'Bendahara',
+            'slug' => 'bendahara'
         ]);
         Jobcategory::create([
-            'nama_jabatan' => 'Membantu Keuangan SIMDA pada Bapelkes',
-            'slug' => 'membantu-keuangan-simda-pada-bapelkes'
+            'nama_jabatan' => 'Pemeliharan Sarana dan Prasarana',
+            'slug' => 'pemeliharan-sarana-dan-prasarana'
         ]);
         Jobcategory::create([
-            'nama_jabatan' => 'Perencanaan pada Bapelkes Mataram',
-            'slug' => 'perencanaan-pada-bapelkes-mataram'
+            'nama_jabatan' => 'Pengadministrasian Umum',
+            'slug' => 'pengadministrasian-umum'
         ]);
         Jobcategory::create([
-            'nama_jabatan' => 'Pengelola Data pada Seksi PP Bapelkes Mataram',
-            'slug' => 'pengelola-data-pada-seksi-pp-bapelkes-mataram'
+            'nama_jabatan' => 'Pramu Bakti',
+            'slug' => 'pramu-bakti'
         ]);
         Jobcategory::create([
-            'nama_jabatan' => 'Bendahara pengeluaran',
-            'slug' => 'bendahara-pengeluaran'
+            'nama_jabatan' => 'Analis Data dan Informasi',
+            'slug' => 'analis-data-dan-informasi'
         ]);
         Jobcategory::create([
-            'nama_jabatan' => 'Analisis Diklat',
-            'slug' => 'analisis-diklat'
-        ]);
-        Jobcategory::create([
-            'nama_jabatan' => 'Pengadministrasi umum',
-            'slug' => 'pengadministrasi-umum'
-        ]);
-        Jobcategory::create([
-            'nama_jabatan' => 'Pengelola Data pada seksi KMP',
-            'slug' => 'pengelola-data-pada-seksi-kmp'
-        ]);
-        Jobcategory::create([
-            'nama_jabatan' => 'Pembantu Pengurus barang',
-            'slug' => 'pembantu-pengurus-barang'
-        ]);
-        Jobcategory::create([
-            'nama_jabatan' => 'Pengadministrasi Keuangan',
-            'slug' => 'pengadministrasi-keuangan'
-        ]);
-        Jobcategory::create([
-            'nama_jabatan' => 'Pengadministrasi Umum pada TU',
-            'slug' => 'pengadministrasi-umum-pada-tu'
+            'nama_jabatan' => 'Analis Diklat',
+            'slug' => 'analis-diklat'
         ]);
     }
 }

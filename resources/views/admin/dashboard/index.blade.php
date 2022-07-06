@@ -3,6 +3,7 @@
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
   <h1 class="h2">Dashboard</h1>
+  <h1 class="h2"></h1>
   <h2 id="clock" style="font-family: fantasy"></h2>
 </div>
  <div class="row">
@@ -86,8 +87,20 @@
     
   </div>
   <div class="col">
-    <h4>All Posting</h4>
-    <div class="card">test</div>
+    <div class="row">
+      <div class="col">
+        <h4>Agenda</h4>
+        <div class="card">
+          tanggal agenda
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h4>All Posting</h4>
+        <div class="card">test</div>
+      </div>
+    </div>
   </div>
  </div>
 

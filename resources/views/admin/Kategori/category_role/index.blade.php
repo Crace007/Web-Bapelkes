@@ -1,8 +1,8 @@
 @extends('admin.layouts.main')
 @section('content')
-    <div class="pt-3 pb-2 mb-3 border-bottom">
-        <h2>Role User Management</h2>
-    </div>
+<div class="pt-3 pb-2 mb-3 border-bottom">
+    <a href="/admin/rolecategories/create" class="btn btn-primary">Add Role</a>
+  </div>
   
   @if (session()->has('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -22,19 +22,22 @@
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Nama User</th>
-            <th scope="col">Role</th>
+            <th scope="col">Nama Role</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
-            @foreach ($user as $item)        
+            @foreach ($data as $category)        
             <tr>
               <td>{{$loop->iteration}}</td>
-              <td>{{$item->name}}</td>
-              <td>{{$item->role->nama}}</td>
+              <td>{{$category->nama}}</td>
               <td>
-                  <a href="/admin/rules/{{$item->slug}}/edit" class="badge bg-primary"> <span data-feather="edit"></span> </a>
+                  <a href="/admin/rolecategories/{{$category->id}}/edit" class="badge bg-primary"> <span data-feather="edit"></span> </a>
+                  <form action="/admin/rolecategories/{{$category->id}}" method="POST" class="d-inline">
+                    @method('delete')
+                    @csrf
+                    <button class="badge bg-danger border-0" onclick="return confirm('Are You Sure ?')"><span data-feather="trash"></span></button>
+                  </form>
               </td>
             </tr>
             @endforeach

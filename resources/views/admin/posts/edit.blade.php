@@ -3,7 +3,7 @@
 
 <div class="pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2 mb-2">Edit Post</h1>
-    <a href="/admin/profile" class="link-secondary"><span data-feather="arrow-left"></span> Back to Profile</a>
+    <a href="/admin/users" class="link-secondary"><span data-feather="arrow-left"></span> Back to Profile</a>
 </div>
 @if (session()->has('success'))
   <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -116,7 +116,9 @@
                 <p class="text-danger">The body field is required</p>
             @enderror
         </div>
-        <button type="submit" class="btn btn-primary">Edit Post</button>
+        <div class="text-end">
+          <button type="submit" class="btn btn-primary mb-3">Edit Post</button>
+        </div>
       </form>
 </div>
 @endsection

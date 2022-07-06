@@ -1,7 +1,9 @@
 @extends('admin.layouts.main')
 @section('content')
-<div class="pt-3 pb-2 mb-3 border-bottom">
+  <div class="pt-3 pb-2 mb-3 border-bottom">
+    @can('admin')
     <a href="/admin/employees/create" class="btn btn-primary">Tambah Data Pegawai</a>
+    @endcan
   </div>
   
   @if (session()->has('success'))
@@ -39,7 +41,7 @@
             <th scope="col">THN</th>
             <th scope="col">BLN</th>
             <th scope="col">DIKLAT</th>
-            <th scope="col">BLN</th>
+            <th scope="col">THN</th>
             <th scope="col">KELAMIN</th>
           </tr>
         </thead>
@@ -80,6 +82,7 @@
                   <li>
                     <a href="/admin/employees/{{$data->id}}" class="dropdown-item" type="button"><span data-feather="eye"></span> Detail</a>
                   </li>
+                  @can('admin')
                   <li>
                     <a href="/admin/employees/{{$data->id}}/edit" class="dropdown-item" type="button"><span data-feather="edit"></span> Edit</a>
                   </li>
@@ -91,6 +94,7 @@
                     </form>
                     {{-- <a href="/admin/employees/{{$data->id}}/edit" class="dropdown-item" type="button"><span data-feather="trash"></span> Delete</a> --}}
                   </li>
+                  @endcan
                 </ul>
               </td>
             </tr>

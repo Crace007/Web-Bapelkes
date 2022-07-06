@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use App\Models\Fileuser;
 use App\Models\Imagepost;
@@ -33,7 +34,9 @@ class UserinfoController extends Controller
      */
     public function create()
     {
-        return view('admin.user.create');
+        return view('admin.user.create', [
+            'data' => Role::where('nama', 'Member')->get()->first(),
+        ]);
     }
 
     /**
@@ -45,6 +48,7 @@ class UserinfoController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
+            'role_id'           => 'required',
             'name'              => 'required|max:60',
             'username'          => 'required|max:25|unique:users',
             'slug'              => 'required|unique:users',

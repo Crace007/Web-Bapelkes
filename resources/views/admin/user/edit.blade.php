@@ -123,6 +123,12 @@
                   THL
                 </label>
               </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="status_pekerjaan" id="status_pekerjaan3" value="Admin" {{ ($data->status_pekerjaan === 'Admin') ? 'checked' : ''}}>
+                <label class="form-check-label" for="status_pekerjaan3">
+                  Admin
+                </label>
+              </div>
             @error('status_pekerjaan')
                 <div class="invalid-feedback">
                     {{$message}}
@@ -143,6 +149,12 @@
                 <input class="form-check-input" type="radio" name="status_hubungan" id="status_hubungan2" value="Lanjang" {{ ($data->status_hubungan === 'Lanjang') ? 'checked' : ''}}>
                 <label class="form-check-label" for="status_hubungan2">
                   Lanjang
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="status_hubungan" id="status_hubungan3" value="Lainnya" {{ ($data->status_hubungan === 'Lainnya') ? 'checked' : ''}}>
+                <label class="form-check-label" for="status_hubungan3">
+                  Lainnya
                 </label>
               </div>
             @error('status_hubungan')
@@ -168,8 +180,8 @@
           @enderror
         </div>
         
-        <div class="text-end">
-          <button type="submit" class="btn btn-primary"><span data-feather="plus"></span> Ubah Data</button>
+        <div class="text-end mb-3">
+          <button type="submit" class="btn btn-primary"><span data-feather="edit"></span> Ubah Data</button>
         </div>
       </form>
 </div>

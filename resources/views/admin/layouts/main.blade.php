@@ -7,7 +7,8 @@
     <meta name="author" content="Lalu M Fatwa Aulia">
     <meta name="generator" content="Hugo 0.88.1">
     <meta name="_token" content="{{ csrf_token() }}"/>
-    <title>Sidebars · Bootstrap v5.1</title>
+    <link rel="icon" href={{ asset('storage/default_image/favicon.png')}} type="png/x-icon">
+    <title>Admin Bapelkes Mataram</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sidebars/">
 
@@ -196,7 +197,7 @@
         imgPreview.style.display = 'block';
   
         const oFReader = new FileReader();
-  
+   
         oFReader.readAsDataURL(image.files[0]);
         
         oFReader.onload =  function(oFREvent){

@@ -9,7 +9,29 @@
 <div class="col-lg-8">
     <form method="post" action="/admin/employees" enctype="multipart/form-data">
         @csrf
+        @can('member')
         <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+        @endcan
+        @can('admin')
+        <div class="mb-3">
+          <label for="Category" class="form-label">User ID</label>
+          <select class="form-select" name="user_id" required>
+            <option value="{{null}}">-- SELECT ONE --</option>
+              @foreach ($user as $item)
+                @if (auth()->user()->id == $item->id)
+                  <option value="{{$item->id}}" selected> {{$item->name}} </option>
+                @else
+                  <option value="{{$item->id}}"> {{$item->name}} </option>
+                @endif
+              @endforeach
+          </select>
+          @error('pangkat_id')
+            <div class="invalid-feedback">
+              {{$message}}
+            </div>
+          @enderror
+        </div>
+        @endcan
         <div class="mb-3">
           <label for="nip" class="form-label">NIP</label>
           <input type="number" class="form-control @error('nip') is-invalid @enderror " id="nip" name="nip" value="{{old('nip')}}" required autofocus >
@@ -136,8 +158,8 @@
         </div>
         <div class="mb-3">
           <label for="foto_pegawai" class="form-label">Foto Pegawai</label>
-          <img src="" class="mt-2 img-preview img-fluid mb-3 col-sm-3" alt="">
           <input type="file" class="form-control @error('foto_pegawai') is-invalid @enderror" id="image" name="foto_pegawai" onchange="previewImage()">
+          <img src="" class="mt-2 img-preview img-fluid mb-3 col-sm-3" alt="">
           @error('foto_pegawai')
             <div class="invalid-feedback">
               {{$message}}

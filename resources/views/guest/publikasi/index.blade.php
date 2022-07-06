@@ -43,7 +43,7 @@
     <div class="container list-publish">
         <div class="row">
             @foreach ($posts->skip(1) as $post)
-                <div class="col-md-4 mb-2">
+                <div class="col-md-4 mb-3">
                     <div class="card">
                         <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7); border-radius: 15px 0px 15px 0px;"><a href="/publikasi?category={{$post->category->slug}}" class="text-decoration-none text-white">{{$post->category->name}}</a></div>   
                         @foreach ($image as $img)
@@ -72,5 +72,8 @@
 @else
     <p class="text-center fs-4">No Post Found</p> 
 @endif
+<div class="mt-2 d-flex justify-content-center">
+    {{ $posts->links() }}
+</div>
 
 @endsection

@@ -14,6 +14,7 @@ use App\Models\Mitra;
 use App\Models\Sarana;
 use App\Models\FasilitasSarana;
 use App\Models\Fotosarana;
+use App\Models\Agenda;
 use Illuminate\Http\Request;
 use Symfony\Polyfill\Intl\Idn\Info;
 
@@ -132,7 +133,7 @@ class HomeController extends Controller
         return view('guest.publikasi.index', [
             'title' => "All Post" . $title,
             'image' => Imagepost::all(),
-            'posts' => post::latest()->filter(request(['search', 'category', 'author']))->paginate(7)->withQueryString()
+            'posts' => post::latest()->filter(request(['search', 'category', 'author']))->paginate(16)->withQueryString()
         ]);
     }
 
@@ -147,10 +148,26 @@ class HomeController extends Controller
     public function sarana()
     {
         return view('guest.pelayanan.sarana', [
-            'title' => 'Sarana Pelayanan',
+            'title'     => 'Sarana Pelayanan',
             'sarana'    => Sarana::all(),
             'fasilitas' => FasilitasSarana::all(),
             'foto'      => Fotosarana::all(),
+        ]);
+    }
+
+    public function agenda()
+    {
+        return view('guest.agenda.index', [
+            'title'     => 'Agenda Kegiatan',
+            'agenda'    => Agenda::all()
+        ]);
+    }
+
+    public function showAgenda($slug)
+    {
+        $data = Agenda::where('slug', $slug)->get()->first();
+        return view('guest.agenda.show', [
+            'data'    => $data,
         ]);
     }
 }

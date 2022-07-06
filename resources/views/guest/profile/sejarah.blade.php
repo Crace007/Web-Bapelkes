@@ -3,7 +3,7 @@
     <div class="row my-3">
         <div class="card">
             <div class="card-body">
-              <h1 class="card-title text-center">STORY</h1>
+              <h1 class="card-title text-center">SEJARAH BAPELKES MATARAM</h1>
                 <div class="card">
                     <ul class="list-group list-group-flush">
                         @if ($sejarah != null)
